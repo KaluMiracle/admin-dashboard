@@ -68,10 +68,12 @@ export default function Login() {
             <p className={styles.link_inline}>Reset Password?</p>
           </Link>
         </div>
-
-        <button disabled={true} formAction='submit'>
+        <Link href={'/Dashboard'}>
+          <button  formAction='submit'>
           Log in
         </button>
+        </Link>
+        
         <div className={styles.box} style={{
           width: '90%',
           ...styles
