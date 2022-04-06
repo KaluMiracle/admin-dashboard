@@ -52,7 +52,7 @@ const BaseLayout = ({
             </Head>
             <nav className={styles.nav}>
                 <div><Image src={logo} alt=''/></div>
-                <h3>Easin</h3>
+                <h3>Easin Arafat</h3>
                 <div>
                     {
                         navItems.map (item =>{
