@@ -1,124 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import salesIcon from '../../assets/icons/sales-products.svg'
-import saveicon from '../../assets/icons/save-products.svg'
-import jobsIcon from '../../assets/icons/job-application.svg'
-import stockIcon from '../../assets/icons/stock-products.svg'
+import star from '../../assets/icons/star.svg'
+
 import { useState, useEffect } from 'react';
-
 import styles from './dashboard.module.scss'
-import { navItemKeys } from '../../layouts/navItems';
+import { navItemKeys, topSellingProducts, analyticsInfo, recentOrders  } from '../../layouts/Arrays';
 import BaseLayout from "../../layouts/baseLayout";
-import { Area } from '@ant-design/plots';
-import { Pie } from '@ant-design/plots';
+import AreaChart from '../../components/AreaChart';
+import PieChart from '../../components/PieChart';
+import ProductCard from '../../components/ProductCard';
 
-const DemoPie = () => {
-  const data = [
-    {
-      type: 'Sale',
-      value: 27,
-    },
-    {
-      type: 'Distribution',
-      value: 25,
-    },
-    {
-      type: 'Return',
-      value: 18,
-    },
-    
-  ];
-  const config = {
-    appendPadding: 10,
-    data,
-    angleField: 'value',
-    colorField: 'type',
-    radius: 1,
-    innerRadius: 0.6,
-    label: {
-      type: 'inner',
-      offset: '-50%',
-      content: '{value}',
-      style: {
-        textAlign: 'center',
-        fontSize: 12,
-      },
-    },
-    interactions: [
-      {
-        type: 'element-selected',
-      },
-      {
-        type: 'element-active',
-      },
-    ],
-    statistic: {
-      title: false,
-      content: {
-        style: {
-          whiteSpace: 'pre-wrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          fontSize:'15px'
-        },
-        content: '80%\nTransactions',
-      },
-    },
-  };
-  return <Pie {...config} />;
-};
-
-
-const DemoArea = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
-  const config = {
-    data,
-    xField: 'Date',
-    yField: 'scales',
-    xAxis: {
-      tickCount: 5,
-    },
-    areaStyle: () => {
-      return {
-        fill: 'l(260) 0.93:rgba(58, 54, 219, 0.5)  0.0:rgba(255, 105, 180, 0.35)',
-        // linear-gradient(89.96deg, rgba(58, 54, 219, 0.5) -0.98%, rgba(255, 105, 180, 0.35) 100%);
-      };
-    },
-
-    animation: true,
-    slider: {
-      start: 0.1,
-      end: 0.9,
-      trendCfg: {
-        isArea: true,
-      },
-    },
-  };
-
-  return <Area {...config} />;
-}
-
-
-
-const analyticsInfo = [
-    {key: 1, icon: saveicon, ammount: 178, title: 'Save Products'},
-    {key: 2, icon: stockIcon, ammount: 20, title: 'Stock Products'},
-    {key: 3, icon: salesIcon, ammount: 190, title: 'Sales Products'},
-    {key: 4, icon: jobsIcon, ammount: 12, title: 'Job Applications'},
-]
 
 const AnalyticsCard = ({
     icon,
@@ -157,9 +48,7 @@ const Dashboard = () => {
                         return (
                             <AnalyticsCard 
                                 key={item.key}
-                                icon={item.icon}
-                                title={item.title}
-                                ammount={item.ammount}
+                                {...item}
                             />
                         )
                     })}
@@ -171,7 +60,7 @@ const Dashboard = () => {
                         height: '95%',
                         marginTop: '20px',
                     }}>
-                        <DemoArea/>
+                        <AreaChart/>
                     </div>
                     
                 </div>
@@ -181,10 +70,72 @@ const Dashboard = () => {
                     ...styles
                 }}>
                     <h2>Analytics</h2>
-                    <DemoPie/>
+                    <PieChart/>
                 </div>
-                
+                <div className={styles.chart_container} style={{
+                    ...styles
+                }}>
+                    <h2>Recent Orders</h2>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Trackin no</th>
+                          <th className={styles.name}>Product Name</th>
+                          <th>Price</th>
+                          <th style={{
+                            width: '15%',
+                            ...styles
+
+                          }}>Total Order</th>
+                          <th>Total Ammount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {recentOrders.map((val, index) => {
+                          return (
+                            <tr key={val.trackingNo} style={{
+                              background: `${(index + 1) % 2 === 0 ? '#F1F4FA' : 'white'}`,
+                              ...styles
+                            }}>
+                              <td>{val.trackingNo}</td>
+                              <td className={styles.name}>
+                                <div className={styles.name_image}><Image src={val.image} alt='' quality={100}/></div>
+                                {val.productName}
+                              </td>
+                              <td>${val.price}</td>
+                              <td className={styles.total_order}>{val.totalOrder}</td>
+                              <td>${val.price * val.totalOrder}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                      
+                    </table>
+                </div>
+                <div className={styles.chart_container} style={{
+                    maxWidth: '500px',
+                    ...styles
+                }}>
+                    <h2>Top Selling Products</h2>
+                    <div style={{
+                      height: '90%',
+                      overflow: 'scroll',
+                      ...styles
+                    }}>
+                      {topSellingProducts.map(item =>{
+                        return (
+                            <ProductCard
+                                key={item.key} 
+                                {...item}
+                            />
+                        )
+                    })}
+                    </div>
+                    
+                </div>
+
             </main>
+
         </BaseLayout>
     )
     

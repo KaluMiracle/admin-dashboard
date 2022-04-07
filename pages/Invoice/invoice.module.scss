@@ -1,0 +1,168 @@
+.main {
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-left: 20px;
+  flex-grow: 2;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+
+    .header_container {
+      display: flex;
+    }
+    input {
+      width: 200px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      margin-left: 10px;
+      padding: 10px 15px;
+      font-size: 10px;
+      background: #ffffff;
+      opacity: 0.8;
+      margin-right: 20px;
+    }
+
+    button {
+      width: 120px;
+      height: 40px;
+      background-color: #3a36db;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      border-radius: 10px;
+      font-style: normal;
+      border: none;
+    }
+  }
+  p {
+    font-size: 13px;
+    font-weight: bold;
+    opacity: 0.5;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    width: 80%;
+    @media only screen and (min-height: 820px) {
+      height: 100vh;
+    }
+  }
+}
+
+.table_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  h2 {
+    font-size: 16px;
+    opacity: 0.5;
+  }
+
+  table {
+    width: 100%;
+    min-width: 1000px;
+    height: 100%;
+    font-size: 12px;
+    font-style: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  thead {
+    width: 97%;
+    border-bottom: 1px solid #a0a5ac;
+  }
+  tbody {
+    height: 90%;
+    overflow: scroll;
+  }
+  tr {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  th {
+    width: 20%;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+  }
+
+  td {
+    width: 20%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+  }
+  .status {
+    width: 15%;
+    height: 40px;
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-style: bold;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4%;
+  }
+  .tr_img {
+    width: 30%;
+    text-align: left;
+    justify-content: flex-start;
+    .img {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+    }
+    .img_small {
+      width: 15px;
+      height: 15px;
+    }
+    input {
+      width: 40px;
+    }
+  }
+}
+.cards_container::-webkit-scrollbar {
+  display: none;
+}

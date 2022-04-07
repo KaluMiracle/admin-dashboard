@@ -5,7 +5,7 @@ import logo from '../assets/images/logo-small.svg'
 import logoutIcon from '../assets/icons/logout.svg'
 import profilePicture from '../assets/images/profile-photo.png'
 import upgrade from '../assets/images/upgrade.png'
-import {navItems} from './navItems'
+import {navItems} from './Arrays'
 import styles from './base-layout.module.scss'
 import { useState } from 'react'
 
@@ -52,7 +52,7 @@ const BaseLayout = ({
             </Head>
             <nav className={styles.nav}>
                 <div><Image src={logo} alt=''/></div>
-                <h3>Easin Arafat</h3>
+                <h3>Easin</h3>
                 <div>
                     {
                         navItems.map (item =>{

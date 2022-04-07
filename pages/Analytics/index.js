@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from './analytics.module.scss'
 import { useState, useEffect } from 'react';
-import { navItemKeys } from '../../layouts/navItems';
+import { navItemKeys } from '../../layouts/Arrays';
 import BaseLayout from "../../layouts/baseLayout";
 
 const Analytics = () => {

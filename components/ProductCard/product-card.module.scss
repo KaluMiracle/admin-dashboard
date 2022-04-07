@@ -1,0 +1,23 @@
+
+.product_card{
+  width: 100%;
+  margin-bottom: 5x;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  
+
+  .details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    h3{
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .stars{
+      display: flex;
+    }
+  }
+}

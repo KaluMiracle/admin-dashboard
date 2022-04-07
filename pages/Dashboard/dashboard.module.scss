@@ -1,18 +1,24 @@
 .main {
   width: 70%;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: 3%;
-  margin-top: 20px;
-  padding: 10px;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 0 20px;
+  margin-left: 20px;
+  flex-grow: 2;
+  overflow: scroll;
+  ::-webkit-scrollbar{
+    display: none;
+  }
   header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
     select {
       width: 130px;
       height: 40px;
@@ -34,20 +40,27 @@
 
   @media only screen and (min-width: 1000px) {
     width: 80%;
+      @media only screen and (min-height: 820px) {
+      height: 100vh;
+    }
   }
+  
 }
 
 .cards_container {
   width: 100%;
+  max-width: 1500px;
   display: flex;
   flex-wrap: wrap;
   margin-right: 10px;
   justify-content: space-between;
+  padding: 0;
+  margin: 0;
 }
 
 .card_analytics {
-  width: 230px;
-  height: 100px;
+  width: 200px;
+  height: 80px;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -56,7 +69,7 @@
   background: #ffffff;
   margin: 10px 0;
   .details {
-    height: 50%;
+    height: 70%;
     h2 {
       margin: 0;
     }
@@ -68,19 +81,101 @@
 
 .chart_container{
   width: 100%;
-  max-width: 700px;
-  height: 400px;
+  max-width: 800px;
+  height: 300px;
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 20px;
-  padding: 15px 20px;
+  padding: 5px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
+  ::-webkit-scrollbar{
+    display: none;
+  }
+
   h2{
     font-size: 16px;
     opacity: 0.5;
   }
+
+  table {
+    width: 95%;
+    height: 80%;
+    opacity: 0.7;
+    font-size: 12px;
+    font-style: bold;
+    margin: 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+  thead{
+    width: 97%;
+    border-bottom: 1px solid #a0a5ac;
+  }
+  tbody{
+    height: 90%;
+    overflow: scroll;
+  }
+  tr{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+    
+  th {
+    width: 20%;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    padding: 0 10px;
+    overflow: hidden;
+
+  }
+    
+  td {
+    width: 20%;
+    height: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    overflow: hidden;
+
+  }
+  .total_order{
+    background-color: #3A36DB;
+    border-radius: 10px;
+    width: 15%;
+    text-align: center;
+    font-size: 15px;
+    font-style: bold;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4%;
+  }
+  .name{
+    width: 25%;
+    text-align: left;
+    justify-content: flex-start;
+    .name_image{
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  }
+  
+}
+.cards_container::-webkit-scrollbar{
+  display: none;
 }
