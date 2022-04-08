@@ -84,11 +84,6 @@
     display: none;
   }
 
-  h2 {
-    font-size: 16px;
-    opacity: 0.5;
-  }
-
   table {
     min-width: 1000px;
     height: 100%;
@@ -101,6 +96,9 @@
   thead {
     width: 100%;
     border-bottom: 1px solid #a0a5ac;
+    height: 70px;
+    opacity: 0.5;
+    margin-bottom: 10px;
   }
   tbody {
     height: 100%;
@@ -114,6 +112,7 @@
     border-radius: 10px;
     background-color: white;
     margin-top: 5px;
+    margin-bottom: 20px;
   }
 
   th {
@@ -135,6 +134,8 @@
     align-items: center;
     padding: 0 10px;
     overflow: hidden;
+    position: relative;
+    overflow: visible;
   }
   .check_box{
     width: 5%;
@@ -145,16 +146,14 @@
     border-radius: 20px;
     margin: 10px;
     text-align: center;
-    font-size: 14px;
     font-style: bold;
-    opacity: 0.9;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 4%;
   }
   .tr_img {
-    width: 30%;
+    width: 20%;
     text-align: left;
     justify-content: flex-start;
     .img {
@@ -168,6 +167,40 @@
     }
     input {
       width: 40px;
+    }
+  }
+  .email{
+    width: 30%;
+  }
+  .box{
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px 10px 10px #bdb7b7;
+    position: absolute;
+    top: 35px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 5px;
+    div{
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #e3e3fd;
+      margin: 3px 0;
+      border-radius: 5px;
+      p{
+        width: 50%;
+        font-size: 11px;
+        opacity: 1;
+        font-weight: normal;
+        color: #3A36DB;
+        
+      }
     }
   }
   @media only screen and (min-width: 540px) {

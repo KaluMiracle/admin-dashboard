@@ -88,20 +88,20 @@ const topSellingProducts = [
 
 
 const invoiceList = [
-  { invoiceId: "8763664", image: invoiceImage1, name: 'Arrora Gaur', email: 'arroragaur@gmail.com', date: '11 Dec, 2020', status: 'complete'},
-  { invoiceId: "3345676", image: invoiceImage2, name: 'James Mulican', email: 'jamesmullican@gmail.com', date: '10 Dec, 2020', status: 'pending' },
-  { invoiceId: "3399676", image: invoiceImage3, name: 'Robert Bacins', email: 'robertbacins@gmail.com', date: '10 Dec, 2020', status: 'complete'},
-  { invoiceId: "9578686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'cancel'},
-  { invoiceId: "9548686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'complete'},
-  { invoiceId: "9576686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending'},
-  { invoiceId: "9535686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending'},
-  { invoiceId: "9570686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'cancel'},
-  { invoiceId: "9599686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'pending'},
-  { invoiceId: "9523686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'cancel'},
-  { invoiceId: "9584686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'pending'},
-  { invoiceId: "9588686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '6 Dec, 2020', status: 'complete'},
-  { invoiceId: "9533686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'complete'},
-  { invoiceId: "9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'complete'},
+  { invoiceId: "8763664", image: invoiceImage1, name: 'Arrora Gaur', email: 'arroragaur@gmail.com', date: '11 Dec, 2020', status: 'complete', stared: true},
+  { invoiceId: "3345676", image: invoiceImage2, name: 'James Mulican', email: 'jamesmullican@gmail.com', date: '10 Dec, 2020', status: 'pending', stared: true },
+  { invoiceId: "3399676", image: invoiceImage3, name: 'Robert Bacins', email: 'robertbacins@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true },
+  { invoiceId: "9578686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'cancel', stared: false },
+  { invoiceId: "9548686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true },
+  { invoiceId: "9576686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false },
+  { invoiceId: "9535686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false },
+  { invoiceId: "9570686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'cancel', stared: false },
+  { invoiceId: "9599686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'pending', stared: true },
+  { invoiceId: "9523686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'cancel', stared: true },
+  { invoiceId: "9584686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'pending', stared: false },
+  { invoiceId: "9588686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '6 Dec, 2020', status: 'complete', stared: false },
+  { invoiceId: "9533686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'complete', stared: true },
+  { invoiceId: "9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'complete', stared: true },
 ]
 
 export {

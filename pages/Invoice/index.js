@@ -6,8 +6,15 @@ import { navItemKeys, invoiceList, } from '../../layouts/Arrays';
 
 import emailIcon from '../../assets/icons/email.svg'
 import calendarIcon from '../../assets/icons/calendar-small.svg'
+import deleteIcon from '../../assets/icons/delete.svg'
 
 import addIcon from '../../assets/icons/add-icon.svg'
+import star from '../../assets/icons/star-green.svg'
+import more from '../../assets/icons/more.svg'
+import deletePink from '../../assets/icons/delete-pink.svg'
+import edit from '../../assets/icons/edit.svg'
+
+
 import { useState } from 'react';
 import { useLayoutEffect } from 'react';
 
@@ -17,7 +24,11 @@ import { useLayoutEffect } from 'react';
 
 const Invoice = () => {
     const [checkedItems, setCheckedItems] = useState([])
+    const [currentItem, setCurrentItem] = useState('')
+
     const [listItems, setListItems] = useState(invoiceList)
+    const [refresh, setRefresh] = useState(false)
+
 
     const itemChecked = (id) =>  Boolean(checkedItems.find(i => i === id))
 
@@ -31,12 +42,22 @@ const Invoice = () => {
         })
         if(checked) setCheckedItems([...idArr])
         else setCheckedItems ([])
-        console.log(checkedItems)
     }
     const itemCheckHandler = (e, id) => {
         const {checked} = e.target;
         if(checked) setCheckedItems([...checkedItems, id])
         else setCheckedItems ([...checkedItems.filter(i => i !== id)])
+        
+    }
+
+    const starHandler = (index, stared) => {
+        console.log(index)
+        console.log(setListItems[index])
+        listItems[index].stared = !listItems[index].stared
+        console.log(listItems[index])
+        setListItems(listItems)
+        setRefresh(!refresh)
+        
         
     }
 
@@ -53,16 +74,20 @@ const Invoice = () => {
         setCheckedItems (checkedItems)
         setListItems(listItems)
     }
+    const deleteItem = (id) => {
+        listItems =  ([...listItems.filter(i => i.invoiceId !== id)])
+        setListItems(listItems)
+    }
     const getColor = (status) => {
         switch (status) {
             case 'complete':
-                return '#3A36DB';
+                return '#e3e3fd';
                 break;
             case 'pending':
-                return ' #03A89E';
+                return ' #bbfcf8';
                 break;
             case 'cancel':
-                return '#FF69B4';
+                return '#fad8e9';
                 break;
         
         
@@ -73,9 +98,10 @@ const Invoice = () => {
         }
     }
 
-    // useLayoutEffect (()=>{
-    //     setListItems(listItems)
-    // }, [listItems])
+    useLayoutEffect(()=>{
+        setListItems(listItems)
+        console.log('layout')
+    },[listItems, refresh])
     return(
         <BaseLayout active={navItemKeys.invoice}>
             <div className={styles.main}>
@@ -83,7 +109,7 @@ const Invoice = () => {
                     <h2>Invoice</h2>
                     <div className={styles.header_container}>
                         <input placeholder='Search' type={'search'}/>
-                        <button onClick={deleteItems}> 
+                        <button> 
                             <div style={{
                                 marginRight: '10px',
                                 ...styles
@@ -106,19 +132,27 @@ const Invoice = () => {
                             </th>
                             <th className={styles.tr_img}>Invoice id</th>
                             <th className={styles.tr_img}>Name</th>
-                            <th className={styles.tr_img}>Email</th>
+                            <th className={`${styles.tr_img} ${styles.email}`}>Email</th>
                             <th className={styles.tr_img}>Date</th>
                             <th style={{
                                 width: '21%',
                                 ...styles
 
                             }}>Status</th>
+                            <th style={{
+                                    width: '10%'
+                            }}><div onClick={deleteItems} style={{
+                                width: '15px',
+                                height: '20px',
+                                position: 'relative',
+                                ...styles
+                            }}><Image src={deleteIcon} layout={'fill'} alt=''/></div></th>
                         </tr>
                         </thead>
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr key={val.invoiceId}>
+                            <tr key={val.invoiceId} onMouseDown={()=>setCurrentItem('')}>
                                 <td className={styles.check_box}>
                                     <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
                                 </td>
@@ -130,7 +164,7 @@ const Invoice = () => {
                                     <div className={styles.img}><Image src={val.image} alt='' quality={100}/></div>
                                     {val.name}
                                 </td>
-                                <td className={styles.tr_img} >
+                                <td className={`${styles.tr_img} ${styles.email}`} >
                                     <div className={`${styles.img} ${styles.img_small}`} style={{
                                         height: '10px',
                                         ...styles
@@ -144,6 +178,35 @@ const Invoice = () => {
                                 <td className={styles.status} style={{
                                     background: `${getColor(val.status)}`
                                 }}>{val.status}</td>
+                                <td style={{
+                                    width: '10%',
+                                    justifyContent: 'flex-start',
+                                }}>
+                                    <div onClick={() => starHandler(index, val.stared)} style={{
+                                        opacity: `${val.stared ? 1 : 0.3}`
+                                    }}><Image src={star} alt=''/></div>
+                                    <div onClick={()=> setCurrentItem(val.invoiceId)}   onMouseEnter={()=> setCurrentItem(val.invoiceId)} style={{
+                                        marginLeft: '30px',
+                                        marginBottom: '5px',
+                                        ...styles
+                                    }}><Image src={more} alt=''/></div>
+                                    <div className={styles.box} style={{
+                                        display: `${val.invoiceId === currentItem ? 'flex' : 'none'}`,
+                                        ...styles
+                                    }}>
+                                        <div>
+                                            <div><Image src={edit} alt=''/></div>
+                                            <p>edit</p>
+                                        </div>
+                                        <div onClick={()=>deleteItem(val.invoiceId)} style={{
+                                                background: '#fbe7f1',
+                                                ...styles
+                                        }}>
+                                            <div><Image src={deletePink} alt=''/></div>
+                                            <p>delete</p>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             )
                         })}
