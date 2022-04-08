@@ -8,12 +8,51 @@ import emailIcon from '../../assets/icons/email.svg'
 import calendarIcon from '../../assets/icons/calendar-small.svg'
 
 import addIcon from '../../assets/icons/add-icon.svg'
+import { useState } from 'react';
+import { useLayoutEffect } from 'react';
+
 
 
 
 
 const Invoice = () => {
+    const [checkedItems, setCheckedItems] = useState([])
+    const [listItems, setListItems] = useState(invoiceList)
 
+    const itemChecked = (id) =>  Boolean(checkedItems.find(i => i === id))
+
+    const checkAllHandler = (e) =>{
+        const {checked} = e.target;
+
+        const idArr = []
+        invoiceList.map(item =>{
+            idArr = [...idArr, item.invoiceId]
+            return (idArr)
+        })
+        if(checked) setCheckedItems([...idArr])
+        else setCheckedItems ([])
+        console.log(checkedItems)
+    }
+    const itemCheckHandler = (e, id) => {
+        const {checked} = e.target;
+        if(checked) setCheckedItems([...checkedItems, id])
+        else setCheckedItems ([...checkedItems.filter(i => i !== id)])
+        
+    }
+
+    const deleteItems = () => {
+        checkedItems.forEach(checkedItem => {
+            listItems.forEach(item => {
+               if (item.invoiceId === checkedItem) {
+                    listItems =  ([...listItems.filter(i => i != item)])
+                    checkedItems = ([...checkedItems.filter(i => i != checkedItem)])
+                }
+
+            })
+        }) 
+        setCheckedItems (checkedItems)
+        setListItems(listItems)
+    }
     const getColor = (status) => {
         switch (status) {
             case 'complete':
@@ -33,6 +72,10 @@ const Invoice = () => {
                 break;
         }
     }
+
+    // useLayoutEffect (()=>{
+    //     setListItems(listItems)
+    // }, [listItems])
     return(
         <BaseLayout active={navItemKeys.invoice}>
             <div className={styles.main}>
@@ -40,7 +83,7 @@ const Invoice = () => {
                     <h2>Invoice</h2>
                     <div className={styles.header_container}>
                         <input placeholder='Search' type={'search'}/>
-                        <button> 
+                        <button onClick={deleteItems}> 
                             <div style={{
                                 marginRight: '10px',
                                 ...styles
@@ -53,28 +96,34 @@ const Invoice = () => {
                 <div className={styles.table_container}>
                     <table>
                         <thead>
-                        <tr>
+                        <tr style={{
+                            background: 'inherit',
+                            ...styles
+                        }}>
+                            <th className={styles.check_box} >
+                                <input type={'checkbox'} checked={checkedItems.length !== 0 && listItems.length !== 0 }  onChange={checkAllHandler}/>
+
+                            </th>
                             <th className={styles.tr_img}>Invoice id</th>
                             <th className={styles.tr_img}>Name</th>
                             <th className={styles.tr_img}>Email</th>
                             <th className={styles.tr_img}>Date</th>
                             <th style={{
-                                width: '17%',
+                                width: '21%',
                                 ...styles
 
                             }}>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {invoiceList.map((val, index) => {
+                        {listItems.map((val, index) => {
                             return (
-                            <tr key={val.invoiceId} style={{
-                                background: `${(index + 1) % 2 === 0 ? 'inherit' : 'white'}`,
-                                ...styles
-                            }}>
+                            <tr key={val.invoiceId}>
+                                <td className={styles.check_box}>
+                                    <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
+                                </td>
                                 <td className={styles.tr_img}>
-                                    <input type={'checkbox'}/>
-
+                                    
                                     #{val.invoiceId}
                                 </td>
                                 <td className={styles.tr_img}>

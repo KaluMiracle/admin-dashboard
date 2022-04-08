@@ -7,7 +7,6 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: 0 20px;
-  margin-left: 20px;
   flex-grow: 2;
   overflow: scroll;
   ::-webkit-scrollbar {
@@ -15,21 +14,27 @@
   }
 
   header {
-    width: 100%;
+    width: 100%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    flex-wrap: wrap;
 
     .header_container {
       display: flex;
+      width: 100%;
+      justify-content: space-between;
+      @media only screen and (min-width: 540px) {
+        width: 400px;
+      }
     }
     input {
       width: 200px;
       height: 40px;
       border: none;
       border-radius: 10px;
-      margin-left: 10px;
+      // margin-left: 10px;
       padding: 10px 15px;
       font-size: 10px;
       background: #ffffff;
@@ -63,13 +68,13 @@
       height: 100vh;
     }
   }
+  
 }
 
 .table_container {
   width: 100%;
-  height: 100%;
+  height: 80%;
   margin-top: 20px;
-  padding: 5px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -85,7 +90,6 @@
   }
 
   table {
-    width: 100%;
     min-width: 1000px;
     height: 100%;
     font-size: 12px;
@@ -95,11 +99,11 @@
     justify-content: space-between;
   }
   thead {
-    width: 97%;
+    width: 100%;
     border-bottom: 1px solid #a0a5ac;
   }
   tbody {
-    height: 90%;
+    height: 100%;
     overflow: scroll;
   }
   tr {
@@ -108,7 +112,8 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    margin-top: 10px;
+    background-color: white;
+    margin-top: 5px;
   }
 
   th {
@@ -130,6 +135,9 @@
     align-items: center;
     padding: 0 10px;
     overflow: hidden;
+  }
+  .check_box{
+    width: 5%;
   }
   .status {
     width: 15%;
@@ -161,6 +169,9 @@
     input {
       width: 40px;
     }
+  }
+  @media only screen and (min-width: 540px) {
+    height: 85%;
   }
 }
 .cards_container::-webkit-scrollbar {

@@ -18,7 +18,7 @@ const AnalyticsCard = ({
 }) => {
     return(
         <div className={styles.card_analytics}>
-            <div><Image src={icon} alt=''/></div>
+            <div className={styles.img_analytics}><Image src={icon} alt=''/></div>
             <div className={styles.details}>
                 <h2>{ammount}+</h2>
                 <p>{title}</p>
@@ -33,7 +33,7 @@ const Dashboard = () => {
             <main className={styles.main}>
                 <header>
                     <h2>Dashboard</h2>
-                    <div>
+                    <div className={styles.header_container}>
                         <select>
                             <option>10-06-2021</option>
                         </select>
@@ -76,41 +76,44 @@ const Dashboard = () => {
                     ...styles
                 }}>
                     <h2>Recent Orders</h2>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Trackin no</th>
-                          <th className={styles.name}>Product Name</th>
-                          <th>Price</th>
-                          <th style={{
-                            width: '15%',
-                            ...styles
+                    <div className={styles.table_container}>
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Trackin no</th>
+                            <th className={styles.name}>Product Name</th>
+                            <th>Price</th>
+                            <th style={{
+                                width: '15%',
+                                ...styles
 
-                          }}>Total Order</th>
-                          <th>Total Ammount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {recentOrders.map((val, index) => {
-                          return (
-                            <tr key={val.trackingNo} style={{
-                              background: `${(index + 1) % 2 === 0 ? '#F1F4FA' : 'white'}`,
-                              ...styles
-                            }}>
-                              <td>{val.trackingNo}</td>
-                              <td className={styles.name}>
-                                <div className={styles.name_image}><Image src={val.image} alt='' quality={100}/></div>
-                                {val.productName}
-                              </td>
-                              <td>${val.price}</td>
-                              <td className={styles.total_order}>{val.totalOrder}</td>
-                              <td>${val.price * val.totalOrder}</td>
+                            }}>Total Order</th>
+                            <th>Total Ammount</th>
                             </tr>
-                          )
-                        })}
-                      </tbody>
-                      
-                    </table>
+                        </thead>
+                        <tbody>
+                            {recentOrders.map((val, index) => {
+                            return (
+                                <tr key={val.trackingNo} style={{
+                                background: `${(index + 1) % 2 === 0 ? '#F1F4FA' : 'white'}`,
+                                ...styles
+                                }}>
+                                <td>{val.trackingNo}</td>
+                                <td className={styles.name}>
+                                    <div className={styles.name_image}><Image src={val.image} alt='' quality={100}/></div>
+                                    {val.name}
+                                </td>
+                                <td>${val.price}</td>
+                                <td className={styles.total_order}>{val.totalOrder}</td>
+                                <td>${val.price * val.totalOrder}</td>
+                                </tr>
+                            )
+                            })}
+                        </tbody>
+                        
+                        </table>
+                    </div>
+                    
                 </div>
                 <div className={styles.chart_container} style={{
                     maxWidth: '500px',

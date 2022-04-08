@@ -15,12 +15,18 @@
     border-radius: 10px;
     padding: 40px 0;
     background-color: white;
-    display: flex;
+    display: none;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-start;
     position: relative;
+    margin-right: 20px;
+
+    @media only screen and (min-width: 500px) {
+        display: flex;
+        
+    }
 
 }
 
