@@ -88,20 +88,93 @@ const topSellingProducts = [
 
 
 const invoiceList = [
-  { invoiceId: "8763664", image: invoiceImage1, name: 'Arrora Gaur', email: 'arroragaur@gmail.com', date: '11 Dec, 2020', status: 'complete', stared: true},
-  { invoiceId: "3345676", image: invoiceImage2, name: 'James Mulican', email: 'jamesmullican@gmail.com', date: '10 Dec, 2020', status: 'pending', stared: true },
-  { invoiceId: "3399676", image: invoiceImage3, name: 'Robert Bacins', email: 'robertbacins@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true },
-  { invoiceId: "9578686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'cancel', stared: false },
-  { invoiceId: "9548686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true },
-  { invoiceId: "9576686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false },
-  { invoiceId: "9535686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false },
-  { invoiceId: "9570686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'cancel', stared: false },
-  { invoiceId: "9599686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'pending', stared: true },
-  { invoiceId: "9523686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'cancel', stared: true },
-  { invoiceId: "9584686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'pending', stared: false },
-  { invoiceId: "9588686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '6 Dec, 2020', status: 'complete', stared: false },
-  { invoiceId: "9533686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'complete', stared: true },
-  { invoiceId: "9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'complete', stared: true },
+  { invoiceId: "#8763664", image: invoiceImage1, name: 'Arrora Gaur', email: 'arroragaur@gmail.com', date: '11 Dec, 2020', status: 'complete', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2,name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3,name:'ipad 2021', rate: 885, qty: 10,},
+  ]},
+  { invoiceId: "#3345676", image: invoiceImage2, name: 'James Mulican', email: 'jamesmullican@gmail.com', date: '10 Dec, 2020', status: 'pending', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ]},
+  { invoiceId: "#3399676", image: invoiceImage3, name: 'Robert Bacins', email: 'robertbacins@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ]},
+  { invoiceId: "#9578686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'cancel', stared: false,items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9548686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '10 Dec, 2020', status: 'complete', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ]},
+  { invoiceId: "#9576686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9535686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'pending', stared: false, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9570686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'cancel', stared: false, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9599686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'pending', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9523686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '8 Dec, 2020', status: 'cancel', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9584686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'pending', stared: false, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9588686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '6 Dec, 2020', status: 'complete', stared: false, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9533686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '9 Dec, 2020', status: 'complete', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+  { invoiceId: "#9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', date: '7 Dec, 2020', status: 'complete', stared: true, items:[
+    {id: 1, name:'ipad 2021', rate: 1000, qty: 10,},
+    {id: 2, name:'Apple mackBook', rate: 1500, qty: 10,},
+    {id: 3, name:'ipad 2021', rate: 885, qty: 10,},
+  ] },
+]
+
+const customerList = [
+  { id: "8763664", image: invoiceImage1, name: 'Arrora Gaur', email: 'arroragaur@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'UI/UX Designer'},
+  { id: "3345676", image: invoiceImage2, name: 'James Mulican', email: 'jamesmullican@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Student' },
+  { id: "3399676", image: invoiceImage3, name: 'Robert Bacins', email: 'robertbacins@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'Banker'  },
+  { id: "9578686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Teacher'  },
+  { id: "9548686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'Frontend Developer'  },
+  { id: "9576686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Student'  },
+  { id: "9535686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Lawyer'  },
+  { id: "9570686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg" , occupation: 'UI/UX Designer' },
+  { id: "9599686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Business Man'  },
+  { id: "9523686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'Policeman'  },
+  { id: "9584686", image: invoiceImage2, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Female', location: "2239  Hog Camp Road Schaumburg", occupation: 'Politician'  },
+  { id: "9588686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'Student'  },
+  { id: "9533686", image: invoiceImage1, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'UI/UX Designer'  },
+  { id: "9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'UI/UX Designer'  },
 ]
 
 export {
@@ -111,4 +184,5 @@ export {
     analyticsInfo, 
     recentOrders,
     invoiceList,
+    customerList,
 };

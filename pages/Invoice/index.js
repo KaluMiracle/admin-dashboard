@@ -17,17 +17,19 @@ import edit from '../../assets/icons/edit.svg'
 
 import { useState } from 'react';
 import { useLayoutEffect } from 'react';
-
+import { useRef } from 'react';
+import InvoiceCard from '../../components/InvoiceCard';
 
 
 
 
 const Invoice = () => {
-    const [checkedItems, setCheckedItems] = useState([])
-    const [currentItem, setCurrentItem] = useState('')
-
     const [listItems, setListItems] = useState(invoiceList)
+    const [checkedItems, setCheckedItems] = useState([])
+    const [currentItem, setCurrentItem] = useState(listItems[0])
+    const [showInvoiceCard, setShowInvoiceCard] = useState(false)
     const [refresh, setRefresh] = useState(false)
+    const rowRef = useRef()
 
 
     const itemChecked = (id) =>  Boolean(checkedItems.find(i => i === id))
@@ -49,6 +51,16 @@ const Invoice = () => {
         else setCheckedItems ([...checkedItems.filter(i => i !== id)])
         
     }
+
+    // const doubleClickHandler = (id) => {
+    //     console.log(rowRef.current.firstChild.children[0].checked)
+        
+    //     const {checked} = !rowRef.current.firstChild.children[0].checked;
+    //     if(checked) setCheckedItems([...checkedItems, id])
+    //     else setCheckedItems ([...checkedItems.filter(i => i !== id)])
+    //     setRefresh(!refresh)
+        
+    // }
 
     const starHandler = (index, stared) => {
         console.log(index)
@@ -78,16 +90,16 @@ const Invoice = () => {
         listItems =  ([...listItems.filter(i => i.invoiceId !== id)])
         setListItems(listItems)
     }
-    const getColor = (status) => {
+    const getBg = (status) => {
         switch (status) {
             case 'complete':
-                return '#e3e3fd';
+                return '#eeeefa';
                 break;
             case 'pending':
                 return ' #bbfcf8';
                 break;
             case 'cancel':
-                return '#fad8e9';
+                return '#fbeaf3';
                 break;
         
         
@@ -98,15 +110,36 @@ const Invoice = () => {
         }
     }
 
+    const getColor = (status) => {
+        switch (status) {
+            case 'complete':
+                return '#3A36DB';
+                break;
+            case 'pending':
+                return '#03A89E';
+                break;
+            case 'cancel':
+                return '#FF69B4';
+                break;
+        
+        
+            default:
+                return '#03A89E';
+
+                break;
+        }
+    }
     useLayoutEffect(()=>{
         setListItems(listItems)
         console.log('layout')
     },[listItems, refresh])
     return(
         <BaseLayout active={navItemKeys.invoice}>
-            <div className={styles.main}>
+            <div className={styles.main} style={{
+                display: `${showInvoiceCard ? 'none' : 'flex'}`
+            }}>
                 <header>
-                    <h2>Invoice</h2>
+                    <h2>Invoice List</h2>
                     <div className={styles.header_container}>
                         <input placeholder='Search' type={'search'}/>
                         <button> 
@@ -130,17 +163,19 @@ const Invoice = () => {
                                 <input type={'checkbox'} checked={checkedItems.length !== 0 && listItems.length !== 0 }  onChange={checkAllHandler}/>
 
                             </th>
-                            <th className={styles.tr_img}>Invoice id</th>
+                            <th className={styles.id}>Invoice id</th>
                             <th className={styles.tr_img}>Name</th>
                             <th className={`${styles.tr_img} ${styles.email}`}>Email</th>
                             <th className={styles.tr_img}>Date</th>
-                            <th style={{
-                                width: '21%',
+                            <th  style={{
+                                    width: '15%',
+                                    marginLeft: '30px',
                                 ...styles
 
                             }}>Status</th>
                             <th style={{
-                                    width: '10%'
+                                    width: '10%',
+                                    justifyContent: 'center'
                             }}><div onClick={deleteItems} style={{
                                 width: '15px',
                                 height: '20px',
@@ -152,13 +187,13 @@ const Invoice = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr key={val.invoiceId} onMouseDown={()=>setCurrentItem('')}>
+                            <tr ref={rowRef} key={val.invoiceId} onClick={()=> setCurrentItem(val)} onMouseLeave={()=>setCurrentItem(val)} onDoubleClick={()=>{setShowInvoiceCard(!showInvoiceCard)}}>
                                 <td className={styles.check_box}>
                                     <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
                                 </td>
-                                <td className={styles.tr_img}>
+                                <td className={styles.id}>
                                     
-                                    #{val.invoiceId}
+                                    {val.invoiceId}
                                 </td>
                                 <td className={styles.tr_img}>
                                     <div className={styles.img}><Image src={val.image} alt='' quality={100}/></div>
@@ -176,11 +211,12 @@ const Invoice = () => {
                                     {val.date}
                                 </td>
                                 <td className={styles.status} style={{
-                                    background: `${getColor(val.status)}`
+                                    background: `${getBg(val.status)}`,
+                                    color: `${getColor(val.status)}`,
                                 }}>{val.status}</td>
                                 <td style={{
                                     width: '10%',
-                                    justifyContent: 'flex-start',
+                                    justifyContent: 'center',
                                 }}>
                                     <div onClick={() => starHandler(index, val.stared)} style={{
                                         opacity: `${val.stared ? 1 : 0.3}`
@@ -188,6 +224,8 @@ const Invoice = () => {
                                     <div onClick={()=> setCurrentItem(val.invoiceId)}   onMouseEnter={()=> setCurrentItem(val.invoiceId)} style={{
                                         marginLeft: '30px',
                                         marginBottom: '5px',
+                                        position:'sticky',
+                                        zIndex:'4',
                                         ...styles
                                     }}><Image src={more} alt=''/></div>
                                     <div className={styles.box} style={{
@@ -199,7 +237,7 @@ const Invoice = () => {
                                             <p>edit</p>
                                         </div>
                                         <div onClick={()=>deleteItem(val.invoiceId)} style={{
-                                                background: '#fbe7f1',
+                                                background: '#fbeaf3',
                                                 ...styles
                                         }}>
                                             <div><Image src={deletePink} alt=''/></div>
@@ -216,6 +254,10 @@ const Invoice = () => {
                 </div>
 
             </div>
+            
+            <InvoiceCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard}/>
+            
+                
             
 
         </BaseLayout>

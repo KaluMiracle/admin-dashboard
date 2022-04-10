@@ -21,7 +21,7 @@ const NavListItem = ({
     return (
         <div className={styles.list_item}>
             <div className={styles.image_container}  onClick={() => setShowDetials(!showDetials)} style={{
-                background: `${active ? '#99B2C6' : '#ffffff'}`,
+                background: `${active ? '#eeeefa' : '#ffffff'}`,
                 ...styles
             }}>
                 <div><Image src={icon} alt=''/></div>
