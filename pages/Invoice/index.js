@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import InvoiceCard from '../../components/InvoiceCard';
+import PreviewCard from '../../components/PreviewCard';
 
 
 
@@ -28,6 +29,8 @@ const Invoice = () => {
     const [checkedItems, setCheckedItems] = useState([])
     const [currentItem, setCurrentItem] = useState(listItems[0])
     const [showInvoiceCard, setShowInvoiceCard] = useState(false)
+    const [invoiceCardProps, setInvoiceCardProps] = useState({})
+
     const [refresh, setRefresh] = useState(false)
     const rowRef = useRef()
 
@@ -187,7 +190,10 @@ const Invoice = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr ref={rowRef} key={val.invoiceId} onClick={()=> setCurrentItem(val)} onMouseLeave={()=>setCurrentItem(val)} onDoubleClick={()=>{setShowInvoiceCard(!showInvoiceCard)}}>
+                            <tr ref={rowRef} key={val.invoiceId} onClick={()=> setCurrentItem(val)} onMouseLeave={()=>setCurrentItem(val)} onDoubleClick={()=>{
+                                            setInvoiceCardProps({...invoiceCardProps, type:'create'})
+                                            setShowInvoiceCard(!showInvoiceCard); 
+                                        }}>
                                 <td className={styles.check_box}>
                                     <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
                                 </td>
@@ -232,7 +238,10 @@ const Invoice = () => {
                                         display: `${val.invoiceId === currentItem ? 'flex' : 'none'}`,
                                         ...styles
                                     }}>
-                                        <div>
+                                        <div onClick={()=>{
+                                            setInvoiceCardProps({...invoiceCardProps, type:'edit'})
+                                            setShowInvoiceCard(!showInvoiceCard); 
+                                        }}>
                                             <div><Image src={edit} alt=''/></div>
                                             <p>edit</p>
                                         </div>
@@ -254,10 +263,14 @@ const Invoice = () => {
                 </div>
 
             </div>
+
+            <div className={`${styles.main}`}>
+                <InvoiceCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/>
+
+                <PreviewCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/> 
+            </div>
             
-            <InvoiceCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard}/>
             
-                
             
 
         </BaseLayout>

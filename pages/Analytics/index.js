@@ -104,7 +104,7 @@ const Analytics = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr key={val.id} onClick={()=> setCurrentItem(val)} onMouseLeave={()=>setCurrentItem(val)} >
+                            <tr key={val.id}   >
                                 
                                 <td className={styles.tr_img}>
                                     <div className={styles.img}><Image src={val.image} alt='' quality={100}/></div>
@@ -124,9 +124,11 @@ const Analytics = () => {
                                     width: '5%',
                                 }}>
                                     
-                                    <div onClick={()=> setCurrentItem(val)}   onMouseEnter={()=> setCurrentItem(val.id)}><Image src={more} alt=''/></div>
+                                    <div 
+                                    // onClick={()=> setCurrentItem(val)}   onMouseEnter={()=> setCurrentItem(val.id)}
+                                    ><Image src={more} alt=''/></div>
                                     <div className={styles.box} style={{
-                                        display: `${val.id === currentItem.id ? 'flex' : 'none'}`,
+                                        // display: `${val.id === currentItem.id ? 'flex' : 'none'}`,
                                         ...styles
                                     }}>
                                         <div>

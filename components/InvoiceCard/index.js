@@ -15,16 +15,24 @@ const InputContainer = ({
     small= false,
     image,
     placeholder=''
+
 }) => {
+
+    let addPlaceholder = true
+    const changeHandler= (e) => {
+        console.log(e)
+        e.target.value = addPlaceholder ? `${placeholder}${e.target.value}` : e.target.value
+        addPlaceholder=false;
+    }
 
     return(
         <div className={styles.input} style={{
-            width: `${small? '40%' : '100%'}`
+            width: `${small? '45%' : '100%'}`
         }}>
             <label>
                 {label}
                 <div className={styles.input_box}>
-                    <input placeholder={placeholder}/>
+                    <input  placeholder={placeholder} onChange={(e)=>changeHandler(e)}/>
                     {
                         image ? <div><Image src={image} alt= ''></Image></div> : ''
 
@@ -50,6 +58,11 @@ const InvoiceCard = ({
         console.log('dd')
         // items =  ([...items.filter(i => i.invoiceId !== id)])
         setItems([...items.filter(i => i.id !== id)])
+    }
+
+
+    const handleSave= ()=>{
+        
     }
     return (
         <div className={styles.container_invoice} style={{

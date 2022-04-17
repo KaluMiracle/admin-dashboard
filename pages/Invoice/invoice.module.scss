@@ -9,7 +9,6 @@
   padding: 0 20px;
   flex-grow: 2;
   overflow: scroll;
-  display: none;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -215,4 +214,9 @@
 }
 .cards_container::-webkit-scrollbar {
   display: none;
+}
+
+
+.sub{
+  background-color: aqua;
 }
