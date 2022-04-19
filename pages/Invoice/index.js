@@ -264,7 +264,7 @@ const Invoice = () => {
 
             </div>
 
-            <div className={`${styles.main}`}>
+            <div className={`${styles.main} ${styles.sub}`}>
                 <InvoiceCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/>
 
                 <PreviewCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/> 

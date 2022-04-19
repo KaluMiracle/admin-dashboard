@@ -1,6 +1,7 @@
 .main {
   width: 70%;
   height: 100vh;
+  min-height: 800px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -218,5 +219,5 @@
 
 
 .sub{
-  background-color: aqua;
+  align-items: center;
 }

@@ -1,20 +1,20 @@
 .container_preview{
     width: 100%;
     height: 95%;
-    padding: 20px 30px;
-    margin: 15px 15px;
+    padding: 20px 15px;
+    margin: 10px 0;
     
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
     background-color: white;
 
     @media only screen and (min-width: 540px) {
-        width: 70%;
     }
     @media only screen and (min-width: 1200px) {
-        width: 45%;
+        width: 48%;
     }
     h2{
         width: 100%;
@@ -40,12 +40,28 @@
         align-items: center;
       }
     }
+
+    h6{
+      color: #06152B;
+      font-size: 10px;
+      margin: 0;
+    }
+    p{
+      font-size: 10px;
+      color: #99B2C6;
+      margin: 0;
+      margin-top: 10px;
+      span{
+        color: #06152B;
+      }
+
+    }
 }
 
 .card{
   width: 100%;
   // height: 35%;
-  padding: 30px;
+  padding: 15px;
   background-color: #F1F4FA;
   display: flex;
   flex-wrap: wrap;
@@ -60,7 +76,7 @@
     justify-content: space-between;
     align-items: flex-start;
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     div{
       p{
@@ -82,6 +98,7 @@
 
     h6{
       margin: 0;
+      
 
     }
 
@@ -97,7 +114,7 @@
 
 .table_container {
   width: 100%;
-  height: 40%;
+  height: 28%;
   margin-top: 10px;
   box-sizing: border-box;
   display: flex;
@@ -105,74 +122,58 @@
   flex-wrap: wrap;
   justify-content: space-between;
   overflow: scroll;
+  margin: 20px 0;
   ::-webkit-scrollbar {
     display: none;
   }
-  button{
-      width: 40%;
-      border: 10px;
-      height: 40px;
-      background-color: #3A36DB;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px;
-  }
-  h3{
-      margin: 0;
-  }
+  
 
   table {
     width: 100%;
-    min-width: 500px;
-    height: 60%;
+    height: 100%;
     font-size: 12px;
     font-style: bold;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 10px 0;
+    // margin: 10px 0;
+    overflow: scroll;
   }
   thead {
     width: 100%;
     height: 20px;
-    margin-bottom: 10px;
+
   }
   tbody {
-    height: 100%;
+    height: calc(90%);
     overflow: scroll;
   }
   tr {
     width: 100%;
-    height: 30px;
+    height: 20px;
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #dcdfe2;
+    margin-bottom: 10px
 
   }
 
   th {
-    width: 25%;
+    width: 15%;
     margin: 0;
     text-align: left;
     display: flex;
     padding: 0 ;
     overflow: hidden;
     text-align: left;
-
-    
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #99B2C6;
   }
   .name{
-      color: #3A36DB;
+      width: 40%;
   }
   .ammount{
-      color: #03A89E;
-      font-size: 15px;
+      width: 20%;
       text-align: right;
       justify-content: flex-end;
   }
@@ -180,25 +181,52 @@
     width: 10%;
   }
   td {
-    width: 25%;
+    width: 15%;
     text-align: left;
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
+    font-size: 10px;
+    font-weight: bold;
   }
   
-  
-  .delete {
-    width: 5%;
-    text-align: left;
-    justify-content: flex-start;
-    
+  .blur{
+    color: #99B2C6;
+    text-transform: uppercase;
   }
+  
   
   
   
 //   @media only screen and (min-width: 540px) {
 //     height: 85%;
 //   }
+}
+
+.bank_details_container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  p{
+    text-align: center;
+  }
+  
+}
+
+.footer{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 1px solid #99b2c689;
+  padding-top: 10px;
+  p{
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  
 }

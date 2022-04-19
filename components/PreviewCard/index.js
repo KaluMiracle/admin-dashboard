@@ -12,15 +12,18 @@ import { useState } from 'react'
 
 
 const PreviewCard = ({
-    type = 'create',
     item = {},
     showInvoiceCard,
     setShowInvoiceCard
 }) =>{
     
     const [items, setItems] = useState(item.items)
-    
-
+    let subtotal = 0
+    items.forEach(item => {
+        
+        subtotal += (item.rate * item.qty)
+        console.log(subtotal) 
+    });
 
     return (
         <div className={styles.container_preview} style={{
@@ -59,8 +62,8 @@ const PreviewCard = ({
                         <p className={styles.details}>
                             4304 Liberty Avenue
                             92680 Tustin, CA
-                            VAT no.: 12345678
                         </p>
+                        <p>VAT no.: 12345678</p>
                         
 
                     </div>
@@ -87,15 +90,8 @@ const PreviewCard = ({
             </div>
             
             
-            {/* <div className={styles.table_container}>
-                <h3>Product Description</h3>
-                <button style={{
-                    width: '30px',
-                    height: '30px',
-                    fontSize: '20px'
-                }}>
-                    +
-                </button>
+            <div className={styles.table_container}>
+                
                 <table>
                     <thead>
                         <tr style={{
@@ -103,13 +99,14 @@ const PreviewCard = ({
                             ...styles
                         }}>
                             
-                            <th>Product Name</th>
-                            <th>Rate</th>
+                            <th className={styles.name}>Description</th>
                             <th className={styles.qty}>QTY</th>
+                            <th>Rate</th>
+                            
                             <th style={{
                                 justifyContent: 'flex-end',
+                                width: '20%',
                             }}>Ammount</th>
-                            <th className={styles.delete}></th>
                           
                         </tr>
                     </thead>
@@ -122,25 +119,92 @@ const PreviewCard = ({
                                 
                                 {val.name}
                             </td>
-                            <td >
-                                {val.rate}
-                            </td>
                             <td className={styles.qty}>
                                 {val.qty}
                             </td>
-                            <td className={styles.ammount}>{val.rate * val.qty}</td>
-                            <td  className={styles.delete}>
-                                <div onClick={()=>deleteItem(val.id)} ><Image src={deleteIcon} alt='' /></div>
+                            <td >
+                                {val.rate}
                             </td>
+                            
+                            <td className={styles.ammount}>{`${String(val.rate * val.qty)}.00 USD`}</td>
+                            
                             
                         </tr>
                         )
                     })}
+                        <tr>
+                            <td className={styles.name}></td>
+                            <td className={styles.blur}>subtotal</td>
+                            <td></td>
+                            <td className={styles.ammount}>{`${String(subtotal)}.00 USD`}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td className={styles.name}></td>
+                            <td className={styles.blur}>discount 5%</td>
+                            <td></td>
+                            <td className={styles.ammount}>{`${String(subtotal * 5/100)}.00 USD`}</td>
+                        </tr>
+
+                        <tr>
+                            <td className={styles.name}></td>
+                            <td>TOTAL</td>
+                            <td></td>
+                            <td  className={styles.ammount} style={{
+                                color: '#3A36DB'
+                            }}>{`${String(subtotal - (subtotal * 5/100))}.00 USD`}</td>
+                        </tr>
+                        
                     </tbody>
                     
                 </table>
                 
-            </div> */}
+            </div>
+
+            <div className={styles.bank_details_container}>
+                <p style={{
+                    width: '100%'
+                }}>Transfer the amount to the business account below. Please include invoice number on your check.</p>
+                <div style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}>
+                    <p style={{
+                        marginRight: '20px'
+                    }}>BANK <span>FTSBUS33</span></p>
+                    <p>IBAN <span>GB82-1111-2222-3333</span></p>
+                </div>
+                
+            </div>
+
+            <h6>NOTES</h6>
+            <p>All amounts are in dollars. Please make the payment within 15 days from the issue of date of this invoice. 
+                Tax is not charged on the basis of paragraph 1 of Article 94 
+                of the Value Added Tax Act (I am not liable for VAT).
+            </p>
+            <p>Thank you for you confidence in my work.</p>
+            <p>Signiture</p>
+
+            <div className={styles.footer}>
+                <div>
+                    <p>YOUR COMPANY</p>
+                    <p>1331 Hart Ridge Road, 48436 Gaines, MI</p>
+                </div>
+                <div>
+                    <p><span>@</span>your.mail@gmail.com</p>
+                    <p><span>m</span> +386 989 271 3115</p>
+                </div>
+                <div style={{
+                    width: '25%',
+                }}>
+                    <p style={{
+                        fontSize: '8px',
+                        lineHeight: '14px',
+                        color: 'black'
+                    }}>the company is registered in the business register under no. 87650000</p>
+                </div>
+            </div>
             
         </div>
         
