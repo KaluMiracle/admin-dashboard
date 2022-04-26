@@ -66,7 +66,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className={styles.chart_container} style={{
-                    maxWidth: '500px',
+                    maxWidth: '550px',
                     ...styles
                 }}>
                     <h2>Analytics</h2>
@@ -116,7 +116,7 @@ const Dashboard = () => {
                     
                 </div>
                 <div className={styles.chart_container} style={{
-                    maxWidth: '500px',
+                    maxWidth: '550px',
                     ...styles
                 }}>
                     <h2>Top Selling Products</h2>
