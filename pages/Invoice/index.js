@@ -15,17 +15,22 @@ import deletePink from '../../assets/icons/delete-pink.svg'
 import edit from '../../assets/icons/edit.svg'
 
 
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import InvoiceCard from '../../components/InvoiceCard';
 import PreviewCard from '../../components/PreviewCard';
+import { InvoiceContext } from '../_app';
+
+
 
 
 
 
 const Invoice = () => {
-    const [listItems, setListItems] = useState(invoiceList)
+
+    const invoiceContext = useContext(InvoiceContext)
+    const [listItems, setListItems] = useState(invoiceContext.invoiceList.items)
     const [checkedItems, setCheckedItems] = useState([])
     const [currentItem, setCurrentItem] = useState(listItems[0])
     const [showInvoiceCard, setShowInvoiceCard] = useState(false)
@@ -65,33 +70,34 @@ const Invoice = () => {
         
     // }
 
-    const starHandler = (index, stared) => {
-        console.log(index)
-        console.log(setListItems[index])
-        listItems[index].stared = !listItems[index].stared
-        console.log(listItems[index])
-        setListItems(listItems)
-        setRefresh(!refresh)
+    const starHandler = (index) => {
         
+
+        
+
+        invoiceContext.invoiceDispatch({type: listItems[index].stared ? 'unstar': 'star', index: index})
+
         
     }
 
     const deleteItems = () => {
-        checkedItems.forEach(checkedItem => {
-            listItems.forEach(item => {
-               if (item.invoiceId === checkedItem) {
-                    listItems =  ([...listItems.filter(i => i != item)])
-                    checkedItems = ([...checkedItems.filter(i => i != checkedItem)])
-                }
+        // checkedItems.forEach(checkedItem => {
+        //     listItems.forEach(item => {
+        //        if (item.invoiceId === checkedItem) {
+        //             listItems =  ([...listItems.filter(i => i != item)])
+        //             checkedItems = ([...checkedItems.filter(i => i != checkedItem)])
+        //         }
 
-            })
-        }) 
-        setCheckedItems (checkedItems)
-        setListItems(listItems)
+        //     })
+        // }) 
+        invoiceContext.invoiceDispatch({type: 'deleteItems', checkedItems: checkedItems})
+        setCheckedItems ([])
     }
     const deleteItem = (id) => {
-        listItems =  ([...listItems.filter(i => i.invoiceId !== id)])
-        setListItems(listItems)
+        // listItems =  ([...listItems.filter(i => i.invoiceId !== id)])
+        // setListItems(listItems)
+        invoiceContext.invoiceDispatch({type: 'deleteItem', index: id})
+        
     }
     const getBg = (status) => {
         switch (status) {
@@ -132,11 +138,15 @@ const Invoice = () => {
                 break;
         }
     }
-    useLayoutEffect(()=>{
-        setListItems(listItems)
+    useEffect(()=>{
+        setListItems(invoiceContext.invoiceList.items)
         console.log('layout')
-    },[listItems, refresh])
+    },[invoiceContext.invoiceList.items,])
+
+    
     return(
+
+
         <BaseLayout active={navItemKeys.invoice}>
             <div className={styles.main} style={{
                 display: `${showInvoiceCard ? 'none' : 'flex'}`
@@ -224,7 +234,7 @@ const Invoice = () => {
                                     width: '10%',
                                     justifyContent: 'center',
                                 }}>
-                                    <div onClick={() => starHandler(index, val.stared)} style={{
+                                    <div onClick={() => starHandler(index)} style={{
                                         opacity: `${val.stared ? 1 : 0.3}`
                                     }}><Image src={star} alt=''/></div>
                                     <div onClick={()=> setCurrentItem(val.invoiceId)}   onMouseEnter={()=> setCurrentItem(val.invoiceId)} style={{

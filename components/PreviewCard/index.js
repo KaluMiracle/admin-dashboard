@@ -22,7 +22,7 @@ const PreviewCard = ({
     items.forEach(item => {
         
         subtotal += (item.rate * item.qty)
-        console.log(subtotal) 
+        // console.log(subtotal) 
     });
 
     return (
