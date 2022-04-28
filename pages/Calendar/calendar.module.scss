@@ -1,5 +1,80 @@
 .site_calendar_demo_card {
-  width: 300px;
+  min-width: 300px;
+  height: 300px;
   border: 1px solid #f0f0f0;
   border-radius: 2px;
+  margin: 0;
+  margin:10px
+}
+.index{
+  width: 70%;
+  height: 100vh;
+  flex-grow: 2;
+  padding: 0 20px;
+
+ 
+  
+ 
+}
+.calendar{
+  span{
+    color: aqua;
+  }
+  // .ant-picker-calendar-date-value{
+  //   color: blue;
+  //   }
+  // .ant-picker-calendar-header{
+  //   width: 100%;
+  //   height: 100px;
+  // }
+  // .ant-select-selector,  .ant-select{
+  //   width: fit-content;
+  //   height: 100px;
+  //   box-sizing: content-box;
+  // }
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.calendar_header{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  h3{
+    justify-self: flex-start;
+  }
+
+  .header_button{
+    width: 70px;
+    height: 40px;
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 30px;
+    background : #c7c6fd;
+
+    color: #06152B;
+    
+    opacity: 0.5;
+    text-transform: capitalize;
+
+  }
+  .active{
+    background: #3A36DB;
+    color: white;
+    opacity: 1;
+  }
+}
+
+.content{
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px
 }
