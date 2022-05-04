@@ -5,26 +5,32 @@ import locationIcon from '../../assets/icons/location-blue.svg'
 import deleteIcon from '../../assets/icons/delete-pink.svg'
 
 
-
 import styles from './invoice-card.module.scss'
-import { useState } from 'react'
-
+import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { InvoiceContext, action_types } from '../../pages/_app'
+import { invoiceList } from '../../layouts/Arrays'
 
 const InputContainer = ({
     label='',
     small= false,
     image,
-    placeholder=''
+    value='',
+    setInvoice,
+    invoice
 
 }) => {
 
-    let addPlaceholder = true
-    const changeHandler= (e) => {
-        console.log(e)
-        e.target.value = addPlaceholder ? `${placeholder}${e.target.value}` : e.target.value
-        addPlaceholder=false;
+
+    const [inputValue, setInputValue] = useState(invoice[value]? invoice[value] : 'street')
+    
+
+    const saveChange = (e) => {
+        console.log('handling')
+        setInvoice({...invoice, [value]: inputValue})
     }
 
+    useEffect(()=>{
+    },[value])
     return(
         <div className={styles.input} style={{
             width: `${small? '45%' : '100%'}`
@@ -32,7 +38,7 @@ const InputContainer = ({
             <label>
                 {label}
                 <div className={styles.input_box}>
-                    <input  placeholder={placeholder} onChange={(e)=>changeHandler(e)}/>
+                    <input value={inputValue} onChange={(e)=>setInputValue(e.target.value)} onMouseOut={saveChange}/>
                     {
                         image ? <div><Image src={image} alt= ''></Image></div> : ''
 
@@ -44,40 +50,59 @@ const InputContainer = ({
     )
 }
 const InvoiceCard = ({
-    type = 'create',
-    item = {},
+    type= 'create',
+    index,
     showInvoiceCard,
-    setShowInvoiceCard
+    setShowInvoiceCard,
+    currentInvoice,
+    setCurrentInvoice,
 }) =>{
+
+    const invoiceContext = useContext(InvoiceContext)
+    
     const title ={
         create: 'Create New Invoice',
         edit: 'Edit Invoice'
     }
-    const [items, setItems] = useState(item.items)
+    const [invoice, setInvoice] = useState(currentInvoice)
+
+    const [items, setItems] = useState(invoice.items)
+
+
     const deleteItem = (id) => {
-        console.log('dd')
-        // items =  ([...items.filter(i => i.invoiceId !== id)])
         setItems([...items.filter(i => i.id !== id)])
+
     }
+
+    
 
 
     const handleSave= ()=>{
-        
+        invoiceContext.invoiceDispatch({
+            type: action_types.UPDATE_INVOICE,
+            payload: {
+                index: index,
+                newInvoice: {...invoice, items: items}
+            }
+        })
+        setCurrentInvoice({...invoice, items: items})
+
+
     }
+
+    
     return (
-        <div className={styles.container_invoice} style={{
-            display: `${showInvoiceCard ? 'flex' : 'none'}`
-        }}>
+        <div className={styles.container_invoice} >
             <h2>{type==='create' ? title.create : title.edit}</h2>
             <div className={styles.image_container}>
                 <div><Image src={cameraIcon} alt=''/></div>
             </div>
             <form className={styles.container_inputs}>
-              <InputContainer small={true} placeholder={item.invoiceId} label='Invoice Id'/>
-              <InputContainer small={true} placeholder={item.date} label='Date' image={calendarIcon}/>
-              <InputContainer small={false} placeholder={item.name} label='Name'/>
-              <InputContainer small={true} placeholder={item.email} label='Email' />
-              <InputContainer small={true} placeholder={'street'} label='Address'image={locationIcon}/>
+              <InputContainer small={true} value={'invoiceId'} label='Invoice Id' setInvoice={setInvoice} invoice={invoice}/>
+              <InputContainer small={true} value={'date'} label='Date' image={calendarIcon} setInvoice={setInvoice} invoice={invoice}/>
+              <InputContainer small={false} value={'name'} label='Name' setInvoice={setInvoice} invoice={invoice}/>
+              <InputContainer small={true} value={'email'} label='Email' setInvoice={setInvoice} invoice={invoice} />
+              <InputContainer small={true} value={'street'} label='Address'image={locationIcon} setInvoice={setInvoice} invoice={invoice}/>
             </form>
             <div className={styles.table_container}>
                 <h3>Product Description</h3>
@@ -138,7 +163,7 @@ const InvoiceCard = ({
                 }}>
                     Send Invoice
                 </button>
-                <button>
+                <button onClick={handleSave}>
                     {type === 'create' ? 'Create Invoice' : 'Save Changes'} 
                 </button>
             </div>

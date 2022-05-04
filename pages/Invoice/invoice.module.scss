@@ -1,7 +1,7 @@
 .main {
   width: 70%;
   height: 100vh;
-  min-height: 800px;
+  min-height: 700px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -219,5 +219,9 @@
 
 
 .sub{
+  min-height: 100vh;
+  flex-grow: 2;
   align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
 }

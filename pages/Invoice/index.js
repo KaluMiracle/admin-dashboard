@@ -20,7 +20,7 @@ import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import InvoiceCard from '../../components/InvoiceCard';
 import PreviewCard from '../../components/PreviewCard';
-import { InvoiceContext } from '../_app';
+import { InvoiceContext, action_types} from '../_app';
 
 
 
@@ -32,7 +32,9 @@ const Invoice = () => {
     const invoiceContext = useContext(InvoiceContext)
     const [listItems, setListItems] = useState(invoiceContext.invoiceList.items)
     const [checkedItems, setCheckedItems] = useState([])
-    const [currentItem, setCurrentItem] = useState(listItems[0])
+    const [currentItem, setCurrentItem] = useState({
+        
+    })
     const [showInvoiceCard, setShowInvoiceCard] = useState(false)
     const [invoiceCardProps, setInvoiceCardProps] = useState({})
 
@@ -71,32 +73,21 @@ const Invoice = () => {
     // }
 
     const starHandler = (index) => {
-        
-
-        
-
-        invoiceContext.invoiceDispatch({type: listItems[index].stared ? 'unstar': 'star', index: index})
-
+        invoiceContext.invoiceDispatch({type: listItems[index].stared ? action_types.UNSTAR: action_types.STAR, payload: index})
         
     }
 
     const deleteItems = () => {
-        // checkedItems.forEach(checkedItem => {
-        //     listItems.forEach(item => {
-        //        if (item.invoiceId === checkedItem) {
-        //             listItems =  ([...listItems.filter(i => i != item)])
-        //             checkedItems = ([...checkedItems.filter(i => i != checkedItem)])
-        //         }
-
-        //     })
-        // }) 
-        invoiceContext.invoiceDispatch({type: 'deleteItems', checkedItems: checkedItems})
+        
+        checkedItems.forEach((item)=>{
+            invoiceContext.invoiceDispatch({type: action_types.DELETE_INVOICE, payload: item})
+        })
         setCheckedItems ([])
     }
     const deleteItem = (id) => {
         // listItems =  ([...listItems.filter(i => i.invoiceId !== id)])
         // setListItems(listItems)
-        invoiceContext.invoiceDispatch({type: 'deleteItem', index: id})
+        invoiceContext.invoiceDispatch({type: action_types.DELETE_INVOICE, payload: id})
         
     }
     const getBg = (status) => {
@@ -138,10 +129,25 @@ const Invoice = () => {
                 break;
         }
     }
+
+    const handleEditClick =(invoice, index)=>{
+        setCurrentItem(invoice)
+        setInvoiceCardProps({
+            ...invoiceCardProps, 
+            type:'edit', 
+            index: index, 
+            currentInvoice: invoice,
+            setCurrentInvoice: setCurrentItem
+        })
+        setShowInvoiceCard(!showInvoiceCard)
+        console.log(invoice)
+        
+    }
     useEffect(()=>{
         setListItems(invoiceContext.invoiceList.items)
+    
         console.log('layout')
-    },[invoiceContext.invoiceList.items,])
+    },[invoiceContext.invoiceList.items])
 
     
     return(
@@ -200,10 +206,7 @@ const Invoice = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr ref={rowRef} key={val.invoiceId} onClick={()=> setCurrentItem(val)} onMouseLeave={()=>setCurrentItem(val)} onDoubleClick={()=>{
-                                            setInvoiceCardProps({...invoiceCardProps, type:'create'})
-                                            setShowInvoiceCard(!showInvoiceCard); 
-                                        }}>
+                            <tr ref={rowRef} key={val.invoiceId}  onDoubleClick={()=>handleEditClick(val, index)}>
                                 <td className={styles.check_box}>
                                     <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
                                 </td>
@@ -248,10 +251,7 @@ const Invoice = () => {
                                         display: `${val.invoiceId === currentItem ? 'flex' : 'none'}`,
                                         ...styles
                                     }}>
-                                        <div onClick={()=>{
-                                            setInvoiceCardProps({...invoiceCardProps, type:'edit'})
-                                            setShowInvoiceCard(!showInvoiceCard); 
-                                        }}>
+                                        <div onClick={()=>{handleEditClick(val, index)}}>
                                             <div><Image src={edit} alt=''/></div>
                                             <p>edit</p>
                                         </div>
@@ -272,13 +272,20 @@ const Invoice = () => {
                     </table>
                 </div>
 
+
             </div>
 
-            <div className={`${styles.main} ${styles.sub}`}>
-                <InvoiceCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/>
+            {showInvoiceCard ? 
 
-                <PreviewCard item={currentItem} showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} {...invoiceCardProps}/> 
-            </div>
+                <div className={`${styles.main} ${styles.sub}`}>
+                    <InvoiceCard  showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard}  {...invoiceCardProps}/>
+
+                    <PreviewCard showInvoiceCard={showInvoiceCard} setShowInvoiceCard={setShowInvoiceCard} listItems={listItems} {...invoiceCardProps}/> 
+                </div>
+
+            :
+
+            null}
             
             
             

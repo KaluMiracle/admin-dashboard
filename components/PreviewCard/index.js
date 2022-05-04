@@ -4,36 +4,44 @@ import downloadIcon from '../../assets/icons/download.svg'
 import printIcon from '../../assets/icons/print.svg'
 import deleteIcon from '../../assets/icons/delete-pink.svg'
 
+import { InvoiceContext, action_types } from '../../pages/_app'
 
 
 import styles from './preview-card.module.scss'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 
 
 const PreviewCard = ({
-    item = {},
-    showInvoiceCard,
-    setShowInvoiceCard
+    index,
+    listItems,
+    currentInvoice,
 }) =>{
-    
-    const [items, setItems] = useState(item.items)
+
+    const invoiceContext = useContext(InvoiceContext)
+    const [invoice, setInvoice] = useState(currentInvoice)
+    const [refresh, setRefresh]= useState(false)
+    const [items, setItems] = useState(invoice.items)
     let subtotal = 0
-    items.forEach(item => {
+    invoice.items.forEach(item => {
         
         subtotal += (item.rate * item.qty)
-        // console.log(subtotal) 
     });
 
+    useEffect(()=>{
+        // console.log('items',index ,invoiceContext.invoiceList.items[index])
+        // setItems(invoice.items)
+        setInvoice(invoiceContext.invoiceList.items[index])
+        
+
+    },[invoiceContext.invoiceList.items[index]])
     return (
-        <div className={styles.container_preview} style={{
-            display: `${showInvoiceCard ? 'flex' : 'none'}`
-        }}>
+        <div className={styles.container_preview} >
             <div className={styles.header}>
                 <h5>Preview</h5>
                 <div className={styles.icons}>
                     <div><Image src={downloadIcon} alt=''/></div>
-                    <div><Image src={printIcon} alt=''/></div>
+                    <div><Image src={printIcon} onClick={()=>setRefresh(!refresh)} alt=''/></div>
                 </div>
             </div>
 
@@ -58,7 +66,7 @@ const PreviewCard = ({
                 </div>
                 <div className={styles.row}>
                     <div>
-                        <p className={styles.details}>{item.name}</p>
+                        <p className={styles.details}>{invoice.name}</p>
                         <p className={styles.details}>
                             4304 Liberty Avenue
                             92680 Tustin, CA
@@ -70,7 +78,7 @@ const PreviewCard = ({
 
                     <div>
                         <p>invoice no</p>
-                        <p className={styles.details}>{item.invoiceId}</p>
+                        <p className={styles.details}>{invoice.invoiceId}</p>
                     </div>
                     
                     
@@ -78,12 +86,12 @@ const PreviewCard = ({
 
                 <div className={styles.row}>
                     <div>
-                        <p><span>@</span>{item.email}</p>
+                        <p><span>@</span>{invoice.email}</p>
                         <p><span>m</span> +386 989 271 3115</p>
                     </div>
                     <div>
                         <p>invoice date</p>
-                        <p className={styles.details}>{item.date}</p>
+                        <p className={styles.details}>{invoice.date}</p>
                     </div>
                     
                 </div>
@@ -111,7 +119,7 @@ const PreviewCard = ({
                         </tr>
                     </thead>
                     <tbody>
-                    {items.map((val, index) => {
+                    {invoice.items.map((val, index) => {
                         return (
                         <tr key={val.id} >
                             
