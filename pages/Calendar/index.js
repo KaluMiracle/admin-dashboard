@@ -5,10 +5,11 @@ import { navItemKeys } from '../../layouts/Arrays';
 import BaseLayout from "../../layouts/baseLayout";
 import { Calendar } from 'antd';
 import 'antd/dist/antd.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import addIcon from '../../assets/icons/add-icon.svg'
 import { customerList } from '../../layouts/Arrays';
 import moment from 'moment';
+import EventModal from '../../components/EventModal';
 
 const people = []
 for (let index = 0; index < 3; index++) {
@@ -16,15 +17,15 @@ for (let index = 0; index < 3; index++) {
     
 }
 
-const events= {
+const eventsList= {
     'may': [{
         day: 1,
-        event: ['meeting with ceo','meeting with ceo','meeting with ceo']
+        event: ['meeting with ceo',]
     }],
     'jun': [
         {
             day: 2,
-            event: ['meeting with ceo','meeting with ceo','meeting with ceo','meeting with ceo','meeting with ceo']
+            event: ['meeting with ceo',]
         },
         {
             day: 7,
@@ -42,21 +43,27 @@ const events= {
     ]
 }
 
-let availDates = []
-Object.values(events).forEach(element => {
-    element.forEach(event => availDates = [...availDates,event.day])
-})
 
 
 
- const dyy = events['jun'].map((value)=>{
-     return value.day   
-})
+
+
+//  const dyy = events['jun'].map((value)=>{
+//      return value.day   
+// })
 
 const Calendard = () => {
 
     const [mode, setMode] = useState('month')
-    const [selectedDate, setSelectedDate] = useState(moment(' 12 may 2022'))
+    const [modal1Visible, setModal1Visible] = useState(false)
+    const [selectedDate, setSelectedDate] = useState(moment(Date()))
+    const [selectedDateMini, setSelectedDateMini] = useState(selectedDate)
+    const [events, setEvents] = useState({...eventsList})
+    let availDates = useMemo(()=>[], [])
+    Object.values(events).forEach(element => {
+        element.forEach(event => availDates = [...availDates,event.day])
+    })
+
 
     const getEvent = useCallback((month, day) => {
         
@@ -71,9 +78,29 @@ const Calendard = () => {
         }
         return data
         
-    },[selectedDate])
+    },[availDates])
     function onPanelChange(value, mode) {
         console.log(value.format('YYYY-MM-DD'), mode);
+    }
+
+    const handleChange = (action)=> {
+        let month = selectedDate.month()
+
+        switch (action) {
+            case 'add':
+                // if (date.value.month() ===0){ month = 10}
+                if (selectedDate.month() ===11){ month = -1}
+                setSelectedDate(moment('1 ' + String(selectedDate._locale._months[month +1]) + ' 2022') );
+                break;
+
+            case 'substract':
+                if (selectedDate.month() ===0) {month= 12}
+                setSelectedDate(moment('1 ' + String(selectedDate._locale._months[month -1]) + ' 2022') )
+                break;
+        
+            default:
+                break;
+        }
     }
 
 
@@ -82,26 +109,8 @@ const Calendard = () => {
     })=>{
         const [active, setActive] = useState(mode)
         const getString = (index)=> String(date.value._d).split(' ')[index]
-        let month = date.value.month()
-        const handleChange = (action)=> {
-
-            switch (action) {
-                case 'add':
-                    // if (date.value.month() ===0){ month = 10}
-                    if (date.value.month() ===11){ month = -1}
-                    console.log(month)
-                    setSelectedDate(moment('1 ' + String(date.value._locale._months[month +1]) + ' 2022') );
-                    break;
-
-                case 'substract':
-                    if (date.value.month() ===0) {month= 12}
-                    setSelectedDate(moment('1 ' + String(date.value._locale._months[month -1]) + ' 2022') )
-                    break;
-            
-                default:
-                    break;
-            }
-        }
+        
+        
 
         const Radio = ({
             text = ''
@@ -143,7 +152,7 @@ const Calendard = () => {
                 </div>
                 
 
-                <div className={styles.date}>
+                <div className={styles.date_container}>
                     <p>{date.value._locale._months[date.value.month()]} {getString(2)} {getString(3)} </p>
                     <div className={styles.controls}>
                         <p onClick={()=> handleChange('substract')}>{'<'}</p>
@@ -173,8 +182,10 @@ const Calendard = () => {
                         
                         
                         return(<>
-                            <p style={{
-                                color: (String(date) === String(selectedDate) ? 'blue' : null)
+                            <p className={styles.date} style={{
+                                // color: (String(date) === String(selectedDate) ? 'blue' : null),
+                                
+                                background: (String(date) === String(selectedDate) ? '#dadaff' : null)
                             }}>{String(date._d.getDate())}</p>
                              
                             
@@ -187,30 +198,46 @@ const Calendard = () => {
 
     useEffect(()=>{
         getEvent()
-    })
+        console.log('rendering')
+    }, [events])
     return(
         <BaseLayout active={navItemKeys.calendar} >
             <div className={styles.index}>
                 <div className={styles.container_create}>
-                    <div className={styles.button}>
+                    <div className={styles.button} onClick={()=> setModal1Visible(true)}>
                         <div className={styles.icon}><Image alt='' src={addIcon}/></div>
                         Create Schedule
                     </div>
 
                     <div className={styles.small_calendar_container + ' ' + styles.small_calendar}>
                         <Calendar 
+
+                            value={selectedDate}
+                            onChange={(date)=>{setSelectedDate(date)}}
                            className={styles.calendar} 
-                           
+
+
                             headerRender={(date)=>{
                                 const getString = (index)=> String(date.value._d).split(' ')[index]
                                 
-                                return <div className={styles.date}>
+                                return( <div className={styles.date_container}>
                                     <p> {getString(0)} {getString(1)} {getString(2)} {getString(3)}</p>
-                                </div>
+                                    <div className={styles.controls}>
+                                        <p onClick={()=> handleChange('substract')}>{'<'}</p>
+                                        <p onClick={()=> handleChange('add')}>{'>'}</p>
+                                    </div>
+                                </div>)
                             }}
                             // fullscreen={false} 
                             dateFullCellRender={(date)=>{
-                                return(<p>{String(date._d.getDate())}</p>)
+                                // console.log(date)
+                                return(
+                                <p className={styles.date} style={{
+                                
+                                        background: (String(date) === String(selectedDate) ? '#dadaff' : null)
+                                    }}
+                                
+                                >{String(date._d.getDate())}</p>)
                             }}
                             // onPanelChange={onPanelChange} value={month} 
                         />
@@ -220,7 +247,7 @@ const Calendard = () => {
 
                         <h3>People</h3>
 
-                        <div className={styles.button + ' ' + styles.search_button}>
+                        <div className={styles.button + ' ' + styles.search_button} >
                             Search for People
                         </div>
 
@@ -273,12 +300,31 @@ const Calendard = () => {
                     const getString = (index)=> String(date._d).split(' ')[index].toLowerCase()
                     
                     return getEvent(getString(1), date._d.getDate()).map( (event, index) => {
-                        return <p key={index} className={styles.event}>{event}</p> 
+                        return <p  key={index} className={styles.event} style={{
+                            background: (index % 2 === 0?  '#FF69B4' : '#3a36db' )
+                        }}>{event}</p> 
                     })
                     
                     
                 }}
                 />
+
+                {
+                    modal1Visible ?
+                        <EventModal
+                            visible={modal1Visible}
+                            setVisible={setModal1Visible}
+                            date={selectedDate}
+                            events={events}
+                            setEvents={setEvents} /> 
+                    : null
+                }
+
+                
+                <br />
+                <br />
+                
+                
                 
             </div>
 

@@ -36,7 +36,10 @@
     color: #06152B;
     font-family: 'regular';
     font-weight: bold;
+    
   }
+
+  
   
 }
 .index {
@@ -50,7 +53,7 @@
   
 
   .container_create{
-    width: 25%;
+    width: 100%;
   
     background-color: white;
     height: 100vh;
@@ -154,34 +157,23 @@
   flex-grow: 2;
   margin-top: 20px;
   background-color: #E5E5E5;;
-  // table{
-  //   margin: 0;
-  //   padding: 0;
-  // }
-  // th{
-  //   background-color: #E5E5E5;
-  // }
+  
   span {
     color: aqua;
   }
-  // .ant-picker-calendar-date-value{
-  //   color: blue;
-  //   }
-  // .ant-picker-calendar-header{
-  //   width: 100%;
-  //   height: 100px;
-  // }
-  // .ant-select-selector,  .ant-select{
-  //   width: fit-content;
-  //   height: 100px;
-  //   box-sizing: content-box;
-  // }
+  
   display: flex;
   flex-wrap: wrap;
   .event{
-    text-align: left;
+    text-align: center;
     margin: 1px 0;
-    font-size: 12px;
+    font-size: 10px;
+    background-color: #3a36db;
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    opacity: 0.9;
+    margin-bottom: 5px;
   }
 }
 
@@ -223,6 +215,7 @@
 
     opacity: 0.5;
     text-transform: capitalize;
+    cursor: pointer;
   }
   .active {
     background: #3a36db;
@@ -252,15 +245,23 @@
 
 .small_calendar{
   width: 100%;
-  height: 250px;
-  position: relative;
+  height: 300px;
   opacity: 0.9;
+  padding: 0;
+  
+  margin: 0;
   // overflow: scroll;
 
   .calendar{
     width: 100%;
-    height: 100%;
-    background-color: white;
+    // height: 100%;
+    padding: 0;
+    margin: 0;
+
+    .date_container{
+      margin: 0;
+      padding: 10px;
+    }
 
     .date {
       margin: 5px 0;
@@ -271,6 +272,7 @@
     }
     table{
       table-layout: auto;
+      // background-color: #3a36db;
 
     }
     th{
@@ -292,7 +294,7 @@
   
 }
 
-.date{
+.date_container{
     width: 100%;
     border-radius: 10px;
     background-color: #ffffff;
@@ -318,3 +320,31 @@
       }
     }
   }
+
+
+.closeButton{
+  width: 90px;
+  background-color: #3A36DB;
+
+
+
+}
+.closeButton:hover{
+  background-color: #3A36DB;
+  opacity: 0.9;
+  font-size: 15px;
+}
+
+.date{
+  padding: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 0;
+  margin-left: 5px;
+  font-size: 14px;
+  text-align: center ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
