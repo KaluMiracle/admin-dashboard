@@ -46,12 +46,6 @@ const eventsList= {
 
 
 
-
-
-//  const dyy = events['jun'].map((value)=>{
-//      return value.day   
-// })
-
 const Calendard = () => {
 
     const [mode, setMode] = useState('month')
@@ -79,6 +73,8 @@ const Calendard = () => {
         return data
         
     },[availDates])
+
+
     function onPanelChange(value, mode) {
         console.log(value.format('YYYY-MM-DD'), mode);
     }
@@ -141,7 +137,7 @@ const Calendard = () => {
         // console.log(moment('1 ' + String(date.value._locale._months[date.value.month() -1]) + ' 2022'))
         return(
             <div className={styles.calendar_header}>
-                <h1>Calendar</h1>
+                
                 <div style={{
                     display: 'flex'
                 }}>
@@ -164,6 +160,8 @@ const Calendard = () => {
             </div>
         )
     }
+
+
     const MiniCalendar = ({
         month
     })=>{
@@ -172,7 +170,7 @@ const Calendard = () => {
                 <Calendar headerRender={(date)=>{
                         
                             
-                            return <p className={styles.header}>{String(date.value._d).split(' ')[1]} 2022</p>
+                            return <p className={styles.header_txt}>{String(date.value._d).split(' ')[1]} 2022</p>
                         }
                     
                     } 
@@ -200,9 +198,14 @@ const Calendard = () => {
         getEvent()
         console.log('rendering')
     }, [events])
+
+
     return(
         <BaseLayout active={navItemKeys.calendar} >
+            
+            <h1 className={styles.header}>Calendar</h1>
             <div className={styles.index}>
+                
                 <div className={styles.container_create}>
                     <div className={styles.button} onClick={()=> setModal1Visible(true)}>
                         <div className={styles.icon}><Image alt='' src={addIcon}/></div>

@@ -1,12 +1,32 @@
+.header {
+    font-size: 25px;
+    font-weight: bold;
+    justify-self: flex-start;
+    margin: 0;
+    margin: 0;
+
+      @media screen and (min-width: 700px){
+        position: absolute;
+        left: 250px;
+      }
+}
+
+
 .small_calendar_container {
-  // min-width: 300px;
-  height: 90%;
- 
-  padding: 10px;
+  width: 100%;
+  height: 100%;
+
+  padding: 5px;
   border-right: 1px solid #e0e3e7;
   border-bottom: 1px solid #e0e3e7;
-  // background-color: #06152B;
+ 
+  table{
+    width: 100%;
+    margin-top: 20px;
+    height: 95%;
+  }
   thead{
+    
     th{
       font-family: 'regular';
       text-align: center;
@@ -29,13 +49,14 @@
       font-weight: bold;
     }
   }
-  .header{
+  .header_txt{
     font-size: 14.22px;
     line-height: 19px;
-    text-align: left;
+    text-align: right;
     color: #06152B;
     font-family: 'regular';
     font-weight: bold;
+    margin: 0;
     
   }
 
@@ -43,22 +64,32 @@
   
 }
 .index {
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   // height: 100vh;
   flex-grow: 2;
   padding: 0 20px;
+  position: relative;
+  overflow: scroll;
+
+  
 
   
 
   .container_create{
     width: 100%;
+    margin-top: 93px;
+    margin-bottom: 80px;
   
     background-color: white;
-    height: 100vh;
+    min-height: fit-content;
+
+    height: 850px;
     
     padding: 40px ;
+
+  
 
     display: flex;
     flex-direction: column;
@@ -135,7 +166,12 @@
 
   }
 
-  @media screen and (min-width: 1024px){
+  @media screen and (min-width: 700px){
+    width: 50%;
+    flex-grow: 2;
+  }
+
+  @media screen and (min-width: 1100px){
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -143,7 +179,8 @@
     .container_create{
       max-width: 300px;
       margin-right: 20px;
-      margin-top: 50px;
+      margin-bottom: 0;
+      
     }
   }
 }
@@ -153,10 +190,12 @@
 
 .calendar {
   max-width: 1700px;
-  width: 70%;
+  width: 100%;
+  min-width: 700px;
   flex-grow: 2;
   margin-top: 20px;
-  background-color: #E5E5E5;;
+  overflow: scroll;
+  // background-color: #E5E5E5;;
   
   span {
     color: aqua;
@@ -174,16 +213,24 @@
     color: white;
     opacity: 0.9;
     margin-bottom: 5px;
+    word-wrap: break-word;
+    ::first-letter{
+      text-transform: uppercase;
+    }
+  }
+  @media screen and (min-width: 1100px){
+    width: 50%;
   }
 }
 
 .calendar_header {
   width: 100%;
-  height: auto;
+  height: fit-content;
+  max-height: auto;
   margin: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   font-family: 'regular';
@@ -191,12 +238,7 @@
   background-color: #E5E5E5;
 
 
-  h1 {
-    font-size: 25px;
-    font-weight: bold;
-    // justig-self: flex-start;
-    margin: 0;
-  }
+  
 
   .header_button {
     min-width:60px;
@@ -231,6 +273,7 @@
   flex-wrap: wrap;
   // margin: 30px;
   width: 100%;
+  height: 100%;
 
   // tbody {
   //   display: flex;
@@ -245,7 +288,7 @@
 
 .small_calendar{
   width: 100%;
-  height: 300px;
+  height: 330px;
   opacity: 0.9;
   padding: 0;
   
@@ -254,9 +297,10 @@
 
   .calendar{
     width: 100%;
-    // height: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
+    min-width: 100px;
 
     .date_container{
       margin: 0;
@@ -304,6 +348,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
     p{
       font-size: 15px;
       // opacity: 0.7;

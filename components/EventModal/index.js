@@ -29,19 +29,21 @@ const EventModal = ({
            
             let arr = events[getString(1).toLowerCase()]
             let arrindex = 50
+            
             arr.find((i , index) => { 
                 arrindex = index; 
-                return i.day === parseInt(getString(2)) }) ?
+                return i.day === parseInt(getString(2)) 
+            }) ?
 
                 events[getString(1).toLowerCase()][arrindex].event.push(
                     InputRef.current.value
                 )
                 
-            :
+                :
 
-            events[getString(1).toLowerCase()].push({
-                    day: parseInt(getString(2)),
-                    event: [InputRef.current.value]
+                events[getString(1).toLowerCase()].push({
+                        day: parseInt(getString(2)),
+                        event: [InputRef.current.value]
                 })
             
             
