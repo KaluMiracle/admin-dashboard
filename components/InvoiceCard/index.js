@@ -3,33 +3,47 @@ import cameraIcon from '../../assets/icons/camera.svg'
 import calendarIcon from '../../assets/icons/calendar-blue.svg'
 import locationIcon from '../../assets/icons/location-blue.svg'
 import deleteIcon from '../../assets/icons/delete-pink.svg'
-
+import moment from 'moment'
 
 import styles from './invoice-card.module.scss'
-import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { InvoiceContext, action_types } from '../../pages/_app'
 import { invoiceList } from '../../layouts/Arrays'
-
+import invoiceImage3 from '../../assets/images/image3.png'
 const InputContainer = ({
     label='',
     small= false,
     image,
     value='',
     setInvoice,
-    invoice
+    invoice,
+    type: current
 
 }) => {
 
+    // invoice.date = moment(invoice.date)
 
-    const [inputValue, setInputValue] = useState(invoice[value]? invoice[value] : 'street')
+    const type = value === 'date'? 'date' : 'text'
+
+    if (current==='create'){
+        invoice.date = moment(Date.now)
+    }else{
+        invoice.date == moment(invoice[value])
+    }
     
+    // const [inputValue, setInputValue] = useState(invoice[value])
+    const [inputValue, setInputValue] = useState(invoice[value])
 
+    // if (type==='date') {
+    //     setInputValue(moment(inputValue))
+    // }
     const saveChange = (e) => {
         console.log('handling')
         setInvoice({...invoice, [value]: inputValue})
     }
 
     useEffect(()=>{
+        console.log(value, inputValue)
     },[value])
     return(
         <div className={styles.input} style={{
@@ -38,7 +52,7 @@ const InputContainer = ({
             <label>
                 {label}
                 <div className={styles.input_box}>
-                    <input value={inputValue} onChange={(e)=>setInputValue(e.target.value)} onMouseOut={saveChange}/>
+                    <input value={inputValue }  type={type} onChange={(e)=>setInputValue(e.target.value)} onMouseOut={saveChange}/>
                     {
                         image ? <div><Image src={image} alt= ''></Image></div> : ''
 
@@ -50,9 +64,8 @@ const InputContainer = ({
     )
 }
 const InvoiceCard = ({
-    type= 'create',
+   
     index,
-    showInvoiceCard,
     setShowInvoiceCard,
     currentInvoice,
     setCurrentInvoice,
@@ -60,6 +73,7 @@ const InvoiceCard = ({
 
     const invoiceContext = useContext(InvoiceContext)
     
+
     const title ={
         create: 'Create New Invoice',
         edit: 'Edit Invoice'
@@ -78,31 +92,54 @@ const InvoiceCard = ({
 
 
     const handleSave= ()=>{
-        invoiceContext.invoiceDispatch({
+        const props = {
             type: action_types.UPDATE_INVOICE,
             payload: {
                 index: index,
                 newInvoice: {...invoice, items: items}
             }
-        })
-        setCurrentInvoice({...invoice, items: items})
-
-
+        }
+        console.log(props.payload.newInvoice)
+        if (type.current === 'create')   {
+            invoiceContext.invoiceDispatch({...props, type: action_types.CREATE_INVOICE})
+            console.log('create', invoice)
+            setCurrentInvoice(props.payload.newInvoice)
+            // setShowInvoiceCard(!showInvoiceCard)
+            return
+        }
+        invoiceContext.invoiceDispatch(props)
+        setCurrentInvoice(props.payload.newInvoice)
     }
 
+
+    const type = useRef()
+    useEffect(()=>{
+
+        console.log('ee', invoiceContext.invoiceList.items[index])
+        type.current = invoiceContext.invoiceList.items[index] ? 'edit' : 'create'
+    })
+    
+
+    const defaultInputContainerProps ={
+        setInvoice,
+        invoice,
+        type: type.current
+    }
     
     return (
         <div className={styles.container_invoice} >
-            <h2>{type==='create' ? title.create : title.edit}</h2>
+            <h2>{type.current==='create' ? title.create : title.edit}</h2>
             <div className={styles.image_container}>
                 <div><Image src={cameraIcon} alt=''/></div>
             </div>
             <form className={styles.container_inputs}>
-              <InputContainer small={true} value={'invoiceId'} label='Invoice Id' setInvoice={setInvoice} invoice={invoice}/>
-              <InputContainer small={true} value={'date'} label='Date' image={calendarIcon} setInvoice={setInvoice} invoice={invoice}/>
-              <InputContainer small={false} value={'name'} label='Name' setInvoice={setInvoice} invoice={invoice}/>
-              <InputContainer small={true} value={'email'} label='Email' setInvoice={setInvoice} invoice={invoice} />
-              <InputContainer small={true} value={'street'} label='Address'image={locationIcon} setInvoice={setInvoice} invoice={invoice}/>
+              <InputContainer small={true} value={'invoiceId'} label='Invoice Id' {...defaultInputContainerProps}/>
+              <InputContainer small={true} value={'date'} label='Date' 
+                // image={calendarIcon} 
+                {...defaultInputContainerProps}/>
+              <InputContainer small={false} value={'name'} label='Name' {...defaultInputContainerProps}/>
+              <InputContainer small={true} value={'email'} label='Email'{...defaultInputContainerProps} />
+              <InputContainer small={true} value={'street'} label='Address'image={locationIcon} {...defaultInputContainerProps}/>
             </form>
             <div className={styles.table_container}>
                 <h3>Product Description</h3>
@@ -156,7 +193,9 @@ const InvoiceCard = ({
                     </tbody>
                     
                 </table>
-                <button onClick={()=> setShowInvoiceCard(!showInvoiceCard)} style={{
+                <button 
+                    onClick={()=> setShowInvoiceCard(false)} 
+                    style={{
                     border: '1px solid #dcdfe2',
                     background: 'white',
                     color: '#3A36DB',
@@ -164,7 +203,7 @@ const InvoiceCard = ({
                     Send Invoice
                 </button>
                 <button onClick={handleSave}>
-                    {type === 'create' ? 'Create Invoice' : 'Save Changes'} 
+                    {type.current === 'create' ? 'Create Invoice' : 'Save Changes'} 
                 </button>
             </div>
             

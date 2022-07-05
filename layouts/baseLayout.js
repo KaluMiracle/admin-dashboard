@@ -19,7 +19,7 @@ const NavListItem = ({
 }) => {
     
     return (
-        <div className={styles.list_item}>
+        <div className={styles.list_item + " " +  (active ? styles.list_item_active : '')}>
             <div className={styles.image_container}  onClick={() => setShowDetials(!showDetials)} style={{
                 background: `${active ? '#eeeefa' : '#ffffff'}`,
                 ...styles
@@ -29,8 +29,7 @@ const NavListItem = ({
             <Link href={`/${title}`}>
                 <p style={{
                     display: `${showDetials?'flex': 'none'}`,
-                    color: `${active ? '#3A36DB' : '#06152B'}`,
-                    opacity: `${active ? 1 : 0.5}`,
+                    
                     ...styles
                 }}>{title}</p>
             </Link>

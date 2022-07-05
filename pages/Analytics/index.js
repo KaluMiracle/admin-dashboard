@@ -12,7 +12,7 @@ import defaultImage from '../../assets/images/image-large.png'
 import locationIcon from '../../assets/icons/location.svg'
 import callIcon from '../../assets/icons/call.svg'
 import messageIcon from '../../assets/icons/message-grey.svg'
-
+import AddCustomerModal from '../../components/AddCustomerModal';
 import { useState } from 'react';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
@@ -24,7 +24,7 @@ import { useRef } from 'react';
 const Analytics = () => {
      const [listItems, setListItems] = useState(customerList)
     const [currentItem, setCurrentItem] = useState(listItems[0])
-    const [showSideContainer, setShowSideContainer] = useState(true)
+    const [showAddModal, setShowAddModal] = useState(false)
 
     
     const deleteItem = (id) => {
@@ -71,7 +71,7 @@ const Analytics = () => {
                 <header>
                     <h2>Customer List</h2>
                     <div className={styles.header_container}>
-                        <button> 
+                        <button onClick={()=> setShowAddModal(true)}> 
                             <div style={{
                                 marginRight: '10px',
                                 ...styles
@@ -104,7 +104,7 @@ const Analytics = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr key={val.id}   >
+                            <tr key={index}  onClick={()=>setCurrentItem(val)}  >
                                 
                                 <td className={styles.tr_img}>
                                     <div className={styles.img}><Image src={val.image} alt='' quality={100}/></div>
@@ -156,29 +156,41 @@ const Analytics = () => {
                 
 
             </div>
-            <div  className={styles.container_side}>
-                <div className={`${styles .name_container} ${styles.border}`}>
-                    <div className={styles.image}>
-                        <div><Image src={defaultImage} alt= '' layout='fill' quality={100}/></div>
-                    </div>
-                    <h2>{currentItem.name}</h2>
-                    <p>{currentItem.occupation}</p>
-                </div>
-                <h2>Contact Info</h2>
-                <div className={`${styles.container_detail} ${styles.border}`}>
-                    <div><Image src={messageIcon} alt=''/></div>
-                    <h2>{currentItem.email}</h2>
-                </div>
-                <div className={`${styles.container_detail} ${styles.border}`}>
-                    <div><Image src={callIcon} alt=''/></div>
-                    <h2>{currentItem.phoneNumber}</h2>
-                </div>
-                <div className={styles.container_detail}>
-                    <div><Image src={locationIcon} alt=''/></div>
-                    <h2>2239 Hog Camp Road Schaumburg</h2>
-                </div>
+            {
+                showAddModal ?
+                    <AddCustomerModal 
+                        visible={showAddModal} 
+                        setVisible={setShowAddModal} 
+                        listItems={listItems} 
+                        setListItems={setListItems}
+                    /> 
+                :
+                    <div  className={styles.container_side}>
+                        <div className={`${styles .name_container} ${styles.border}`}>
+                            <div className={styles.image}>
+                                <div><Image src={defaultImage} alt= '' layout='fill' quality={100}/></div>
+                            </div>
+                            <h2>{currentItem.name}</h2>
+                            <p>{currentItem.occupation}</p>
+                        </div>
+                        <h2>Contact Info</h2>
+                        <div className={`${styles.container_detail} ${styles.border}`}>
+                            <div><Image src={messageIcon} alt=''/></div>
+                            <h2>{currentItem.email}</h2>
+                        </div>
+                        <div className={`${styles.container_detail} ${styles.border}`}>
+                            <div><Image src={callIcon} alt=''/></div>
+                            <h2>{currentItem.phoneNumber}</h2>
+                        </div>
+                        <div className={styles.container_detail}>
+                            <div><Image src={locationIcon} alt=''/></div>
+                            <h2>2239 Hog Camp Road Schaumburg</h2>
+                        </div>
 
-            </div>
+                    </div>
+            }
+
+            
 
         </BaseLayout>
     )

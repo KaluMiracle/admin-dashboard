@@ -4,12 +4,15 @@ import {invoiceList} from '../layouts/Arrays'
 import { createContext, useEffect, useReducer } from 'react'
 
 export const InvoiceContext = createContext()
+
+
 export const action_types ={
   STAR: 'star',
   UNSTAR: 'unstar',
   DELETE_INVOICE: 'delete invoice',
   DELETE_ITEM: 'delete item',
-  UPDATE_INVOICE: 'update invoice'
+  UPDATE_INVOICE: 'update invoice',
+  CREATE_INVOICE: 'create invoice'
 
 }
 
@@ -31,8 +34,8 @@ const reducer = (state, action) => {
       return state
 
     case action_types.UPDATE_INVOICE:
+      console.log('running dispatch')
       state.items[action.payload.index] =  action.payload.newInvoice
-
       return state
     
     case action_types.DELETE_ITEM:
@@ -42,6 +45,10 @@ const reducer = (state, action) => {
 
       return state
 
+    case action_types.CREATE_INVOICE:
+      state.items =  [...state.items, action.payload.newInvoice]
+
+      return state
 
     default : return state
   }

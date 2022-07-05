@@ -26,6 +26,7 @@ import jobsIcon from '../assets/icons/job-application.svg'
 import stockIcon from '../assets/icons/stock-products.svg'
 
 import invoiceImage1 from '../assets/images/image1.png'
+
 import invoiceImage2 from '../assets/images/image2.png'
 import invoiceImage3 from '../assets/images/image3.png'
 
@@ -177,6 +178,85 @@ const customerList = [
   { id: "9574686", image: invoiceImage3, name: 'Givenchy Parfum', email: 'givenchyparfum@gmail.com', phoneNumber: '+333757005437', gender: 'Male', location: "2239  Hog Camp Road Schaumburg", occupation: 'UI/UX Designer'  },
 ]
 
+const tasks = {
+  todo: [
+    {
+      title: 'Dashboard Design',
+      tags: ['low', 'on Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'Landing page Design',
+      tags: ['Medium', 'At risk'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'E-Shop Mobile App',
+      tags: ['High'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'Dashboard Design',
+      tags: ['low', 'on Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    
+  ],
+  inProgress: [
+    {
+      title: 'Dashboard Design',
+      tags: ['low', 'on Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'Landing page Design',
+      tags: ['Low'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'E-Shop Mobile App',
+      tags: ['low', 'on Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    
+  ],
+  inReview: [
+    {
+      title: 'Dashboard Design',
+      tags: ['high', 'on track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'Landing Page Design',
+      tags: ['low'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+    {
+      title: 'E-Shop Mobile App',
+      tags: ['low', 'on Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+  ],
+  done: [
+    {
+      title: 'Dashboard Design',
+      tags: ['High', 'On Track'],
+      description: 'Discussion for management dashboard ui design',
+      people:[]
+    },
+  ]
+}
+
 export {
     navItems, 
     navItemKeys, 
@@ -185,4 +265,5 @@ export {
     recentOrders,
     invoiceList,
     customerList,
+    tasks
 };

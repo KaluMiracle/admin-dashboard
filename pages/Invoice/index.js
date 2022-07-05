@@ -30,11 +30,10 @@ import { InvoiceContext, action_types} from '../_app';
 const Invoice = () => {
 
     const invoiceContext = useContext(InvoiceContext)
+    
     const [listItems, setListItems] = useState(invoiceContext.invoiceList.items)
     const [checkedItems, setCheckedItems] = useState([])
-    const [currentItem, setCurrentItem] = useState({
-        
-    })
+    const [currentItem, setCurrentItem] = useState()
     const [showInvoiceCard, setShowInvoiceCard] = useState(false)
     const [invoiceCardProps, setInvoiceCardProps] = useState({})
 
@@ -143,9 +142,26 @@ const Invoice = () => {
         console.log(invoice)
         
     }
+
+    const handleCreateCLick =()=>{
+        
+        setInvoiceCardProps({
+            ...invoiceCardProps, 
+            type:'create', 
+            index: invoiceList.length,
+            setCurrentInvoice: setCurrentItem,
+            currentInvoice: { 
+                invoiceId: "", image: invoiceList[1].image, name: '', email: '', date: '', status: '', stared: true,items: []
+            }
+        })
+        setShowInvoiceCard(!showInvoiceCard)
+        
+    }
+
+
     useEffect(()=>{
         setListItems(invoiceContext.invoiceList.items)
-    
+        
         console.log('layout')
     },[invoiceContext.invoiceList.items])
 
@@ -161,7 +177,7 @@ const Invoice = () => {
                     <h2>Invoice List</h2>
                     <div className={styles.header_container}>
                         <input placeholder='Search' type={'search'}/>
-                        <button> 
+                        <button onClick={handleCreateCLick}> 
                             <div style={{
                                 marginRight: '10px',
                                 ...styles
@@ -206,7 +222,7 @@ const Invoice = () => {
                         <tbody>
                         {listItems.map((val, index) => {
                             return (
-                            <tr ref={rowRef} key={val.invoiceId}  onDoubleClick={()=>handleEditClick(val, index)}>
+                            <tr ref={rowRef} key={index}  onDoubleClick={()=>handleEditClick(val, index)}>
                                 <td className={styles.check_box}>
                                     <input checked={itemChecked(val.invoiceId)} type={'checkbox'} onChange={(e)=>itemCheckHandler(e, val.invoiceId)}/>
                                 </td>

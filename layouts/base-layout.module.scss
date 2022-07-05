@@ -48,6 +48,7 @@
     margin-right: 30px;
     padding: 0;
     padding-right: 10px;
+    cursor: pointer;
 
     .image_container{
         width: 60px;
@@ -65,7 +66,21 @@
         font-size: 13px;
         color: #06152B;
         margin-left: 30px;
+        font-weight: 500;
+    }
+
+}
+.list_item:hover {
+    p{
+        color: #3a36db;
+    }
+}
+
+.list_item_active{
+    p{
         font-weight: bold;
+        color: #3A36DB;
+        opacity: 1;
     }
 }
 .image_container_upgrade{
@@ -81,6 +96,7 @@
     align-items: center;
     position: absolute;
     bottom: 5px;
+    cursor: pointer;
 
     .box{
         width: 100px;

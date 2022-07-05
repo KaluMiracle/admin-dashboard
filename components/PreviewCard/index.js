@@ -8,8 +8,10 @@ import { InvoiceContext, action_types } from '../../pages/_app'
 
 
 import styles from './preview-card.module.scss'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { invoiceList } from '../../layouts/Arrays'
 
+import invoiceImage3 from '../../assets/images/image3.png'
 
 
 const PreviewCard = ({
@@ -21,7 +23,7 @@ const PreviewCard = ({
     const invoiceContext = useContext(InvoiceContext)
     const [invoice, setInvoice] = useState(currentInvoice)
     const [refresh, setRefresh]= useState(false)
-    const [items, setItems] = useState(invoice.items)
+    // const [items, setItems] = useState(invoice.items)
     let subtotal = 0
     invoice.items.forEach(item => {
         
@@ -29,12 +31,15 @@ const PreviewCard = ({
     });
 
     useEffect(()=>{
-        // console.log('items',index ,invoiceContext.invoiceList.items[index])
+        console.log('items',index ,invoiceContext.invoiceList.items[index])
         // setItems(invoice.items)
-        setInvoice(invoiceContext.invoiceList.items[index])
+        const newInvoice = invoiceContext.invoiceList.items[index]
+        setInvoice(newInvoice ? newInvoice : currentInvoice)
+        
+        
         
 
-    },[invoiceContext.invoiceList.items[index]])
+    },[currentInvoice, refresh, index, invoiceContext.invoiceList.items[index]])
     return (
         <div className={styles.container_preview} >
             <div className={styles.header}>
