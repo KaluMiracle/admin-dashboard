@@ -1,0 +1,233 @@
+.container_preview{
+    width: 100%;
+    height: calc(100% - 20px);
+    padding: 20px 15px;
+    margin: 10px 0;
+    
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+
+    @media only screen and (min-width: 540px) {
+    }
+    @media only screen and (min-width: 1200px) {
+        width: 48%;
+    }
+    h2{
+        width: 100%;
+    }
+
+    h5{
+      color: #06152B;
+      font-size: 20px;
+      margin: 0;
+    }
+    
+    .header{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+      
+      .icons{
+        width: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    h6{
+      color: #06152B;
+      font-size: 10px;
+      margin: 0;
+    }
+    p{
+      font-size: 10px;
+      color: #99B2C6;
+      margin: 0;
+      margin-top: 10px;
+      span{
+        color: #06152B;
+      }
+
+    }
+}
+
+.card{
+  width: 100%;
+  // height: 35%;
+  padding: 15px;
+  background-color: #F1F4FA;
+  display: flex;
+  flex-wrap: wrap;
+  p{
+    margin: 0;
+  }
+
+  .row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0;
+    margin-bottom: 10px;
+
+    div{
+      p{
+        max-width: 150px;
+      }
+    }
+
+    p{
+      max-width: 20%;
+      font-size: 12px;
+      font-weight: 500;
+
+      span{
+        color: #3A36DB;
+        font-weight: bold;
+        margin-right: 3px;
+      }
+    }
+
+    h6{
+      margin: 0;
+      
+
+    }
+
+    .details{
+      color: #99B2C6;
+      font-weight: 400;
+    }
+
+    
+  }
+}
+
+
+.table_container {
+  width: 98%;
+  height: 28%;
+  margin-top: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: scroll;
+  margin: 20px 0;
+  align-self: center;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+  table {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    font-style: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // margin: 10px 0;
+    overflow: scroll;
+  }
+  thead {
+    width: 100%;
+    height: 20px;
+
+  }
+  tbody {
+    height: calc(90%);
+    overflow: scroll;
+  }
+  tr {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
+
+  }
+
+  th {
+    width: 15%;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    padding: 0 ;
+    overflow: hidden;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #99B2C6;
+  }
+  .name{
+      width: 40%;
+  }
+  .ammount{
+      width: 20%;
+      text-align: right;
+      justify-content: flex-end;
+  }
+  .qty{
+    width: 10%;
+  }
+  td {
+    width: 15%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  
+  .blur{
+    color: #99B2C6;
+    text-transform: uppercase;
+  }
+  
+  
+  
+  
+//   @media only screen and (min-width: 540px) {
+//     height: 85%;
+//   }
+}
+
+.bank_details_container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  p{
+    text-align: center;
+  }
+  
+}
+
+.footer{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 1px solid #99b2c689;
+  padding-top: 10px;
+  p{
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  
+}

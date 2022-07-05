@@ -7,7 +7,7 @@ import successImage from '../assets/images/success.svg'
 import thumbsUp from '../assets/images/thumbsup.svg'
 
 
-export default function RecoverPassword() {
+export default function Confirm() {
   return (
     <div className={`${styles.container} ${styles.container_small}`}>
       <Head>
@@ -22,7 +22,7 @@ export default function RecoverPassword() {
         </div>
           
         <h3>Your account was successfully created</h3>
-        <Link href={'/'}>
+        <Link href={'/Dashboard'}>
             <button className={styles.btn_short} formAction='submit'>
                 Go to Home
             </button>
